@@ -1,0 +1,1445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crew Automate — Community Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --font-heading: 'Roboto Mono', monospace;
+    --font-body: 'Montserrat', sans-serif;
+    --color-primary: #fff;
+    --color-white: #fff;
+    --bg-primary: #F8F8F8;
+    --color-orange: #E8833A;
+    --color-blue: #4AA8E0;
+    --color-blue-mid: #3D8EC9;
+    --color-teal: #2E7A8A;
+    --color-connect: #E8833A;
+    --color-inspire: #AAEEC4;
+    --color-awards: #3D8EC9;
+    --color-read: #c0ab3c;
+    --color-learn: #4AA8E0;
+    --color-jobs: #2E7A8A;
+    --header-height: 56px;
+    --pad-inner: 32px;
+    --innerWidth: 1280px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html {
+    font-family: var(--font-body);
+    font-size: 14px;
+    background: #070d1a;
+    color: #fff;
+    scroll-behavior: smooth;
+  }
+
+  body { min-height: 100vh; background: transparent; position: relative; z-index: 1; }
+
+  /* ── HEADER ── */
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    height: var(--header-height);
+    background: rgba(7,13,26,0.7);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid #ffffff12;
+    display: flex;
+    align-items: center;
+    padding: 0 var(--pad-inner);
+  }
+
+  .header-inner {
+    width: 100%;
+    max-width: var(--innerWidth);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 700;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    font-family: var(--font-heading);
+    white-space: nowrap;
+  }
+
+  .logo-img {
+    height: 38px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 6px;
+    flex-shrink: 0;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    margin-left: 16px;
+  }
+
+  .nav a {
+    padding: 6px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #aaa;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: var(--font-body);
+    transition: color 0.15s, background 0.15s;
+  }
+
+  .nav a:hover { color: #fff; background: #ffffff10; }
+  .nav a.active { color: #fff; background: #ffffff18; }
+
+  .header-actions {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .btn-sm {
+    padding: 7px 16px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    font-family: var(--font-body);
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: #aaa;
+    border: 1px solid #ffffff20;
+  }
+
+  .btn-ghost:hover { color: #fff; border-color: #ffffff40; }
+
+  .btn-primary {
+    background: #3D8EC9;
+    color: #fff;
+    border: 1px solid transparent;
+  }
+
+  .btn-primary:hover { background: #4AA8E0; }
+
+  /* ── PAGE LAYOUT ── */
+  .page {
+    max-width: var(--innerWidth);
+    margin: 0 auto;
+    padding: 28px var(--pad-inner) 80px;
+    display: grid;
+    grid-template-columns: 200px 1fr 260px;
+    gap: 24px;
+  }
+
+  /* ── SIDEBAR LEFT ── */
+  .sidebar-left {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-top: 4px;
+  }
+
+  .sidebar-section-label {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #444;
+    padding: 12px 10px 4px;
+    font-family: var(--font-heading);
+  }
+
+  .sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #777;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: var(--font-body);
+    transition: color 0.13s, background 0.13s;
+  }
+
+  .sidebar-link:hover { color: #fff; background: #ffffff0e; }
+  .sidebar-link.active { color: #fff; background: #ffffff14; }
+
+  .sidebar-link .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .s-icon {
+    width: 16px;
+    height: 16px;
+    opacity: 0.6;
+    flex-shrink: 0;
+  }
+
+  /* ── MAIN ── */
+  .main { display: flex; flex-direction: column; gap: 28px; }
+
+  /* ── HERO CARD ── */
+  .hero-card {
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    min-height: 300px;
+    background: rgba(7,13,26,0.45);
+    backdrop-filter: blur(2px);
+    padding: 36px 220px 32px 36px;
+  }
+
+  #aurora-canvas {
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .hero-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      rgba(5,12,28,0.72) 0%,
+      rgba(5,12,28,0.45) 55%,
+      rgba(5,12,28,0.15) 100%
+    );
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .hero-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #ffffff12;
+    border: 1px solid #ffffff1e;
+    border-radius: 100px;
+    padding: 5px 12px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    color: #8ac8e8;
+    margin-bottom: 16px;
+    font-family: var(--font-heading);
+  }
+
+  .hero-tag-dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: #3D8EC9;
+  }
+
+  .hero-title {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 1.28;
+    letter-spacing: -0.03em;
+    color: #fff;
+    max-width: 420px;
+    margin-bottom: 12px;
+    font-family: var(--font-heading);
+  }
+
+  .hero-body {
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.75;
+    color: rgba(255,255,255,0.55);
+    max-width: 380px;
+    margin-bottom: 24px;
+    font-family: var(--font-body);
+  }
+
+  .hero-actions {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+
+  .btn-hero-primary {
+    padding: 10px 20px;
+    background: #3D8EC9;
+    color: #fff;
+    border: none;
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: var(--font-heading);
+    transition: background 0.14s;
+    letter-spacing: 0.03em;
+  }
+
+  .btn-hero-primary:hover { background: #4AA8E0; }
+
+  .btn-hero-ghost {
+    padding: 10px 20px;
+    background: #ffffff12;
+    color: rgba(255,255,255,0.85);
+    border: 1px solid #ffffff22;
+    border-radius: 9px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: var(--font-body);
+    transition: background 0.14s;
+  }
+
+  .btn-hero-ghost:hover { background: #ffffff1e; }
+
+  .hero-stats {
+    display: flex;
+    gap: 28px;
+  }
+
+  .hero-stat { display: flex; flex-direction: column; gap: 2px; }
+
+  .hero-stat-number {
+    font-size: 19px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.3px;
+    font-family: var(--font-heading);
+  }
+
+  .hero-stat-label {
+    font-size: 10px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 500;
+    font-family: var(--font-body);
+  }
+
+  /* Hero floating cards */
+  .hero-visual {
+    position: absolute;
+    right: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    width: 172px;
+  }
+
+  .hero-mini-card {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.11);
+    border-radius: 12px;
+    padding: 12px 14px;
+    backdrop-filter: blur(14px);
+  }
+
+  .hero-mini-card-label {
+    font-size: 9px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 700;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    font-family: var(--font-heading);
+  }
+
+  .hero-mini-card-value {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    font-family: var(--font-heading);
+  }
+
+  .hero-mini-card-sub {
+    font-size: 10px;
+    color: rgba(255,255,255,0.35);
+    margin-top: 2px;
+    font-family: var(--font-body);
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+
+  .section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #fff;
+    letter-spacing: -0.3px;
+    font-family: var(--font-heading);
+  }
+
+  .section-link {
+    font-size: 11px;
+    font-weight: 500;
+    color: #555;
+    text-decoration: none;
+    transition: color 0.13s;
+    font-family: var(--font-body);
+  }
+
+  .section-link:hover { color: #999; }
+
+  /* ── CATEGORY GRID ── */
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .category-card {
+    border-radius: 14px;
+    padding: 16px 16px 13px;
+    cursor: pointer;
+    transition: transform 0.15s;
+    text-decoration: none;
+    display: block;
+  }
+
+  .category-card:hover { transform: translateY(-2px); }
+
+  .category-card.connect { background: linear-gradient(135deg, #2a1208, #3d1a0e); border: 1px solid #e8833a2a; }
+  .category-card.inspire { background: linear-gradient(135deg, #0a1f16, #0d2b1d); border: 1px solid #aaeec42a; }
+  .category-card.awards  { background: linear-gradient(135deg, #081828, #0d2840); border: 1px solid #3d8ec938; }
+  .category-card.read    { background: linear-gradient(135deg, #1e1a08, #2a240c); border: 1px solid #c0ab3c28; }
+  .category-card.learn   { background: linear-gradient(135deg, #081422, #0d1e35); border: 1px solid #4aa8e028; }
+  .category-card.jobs    { background: linear-gradient(135deg, #071420, #0b1e30); border: 1px solid #2e7a8a28; }
+
+  .category-chip {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 100px;
+    padding: 3px 9px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 9px;
+    font-family: var(--font-heading);
+  }
+
+  .chip-connect { background: #E8833A; color: #fff; }
+  .chip-inspire { background: #AAEEC4; color: #0a2e1a; }
+  .chip-awards  { background: #3D8EC9; color: #fff; }
+  .chip-read    { background: #c0ab3c; color: #1a1600; }
+  .chip-learn   { background: #4AA8E0; color: #071520; }
+  .chip-jobs    { background: #2E7A8A; color: #fff; }
+
+  .category-card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.88);
+    margin-bottom: 3px;
+    font-family: var(--font-body);
+  }
+
+  .category-card-count {
+    font-size: 10px;
+    color: rgba(255,255,255,0.3);
+    font-family: var(--font-body);
+  }
+
+  /* ── FEATURED ROW ── */
+  .featured-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+
+  .featured-card {
+    border-radius: 13px;
+    overflow: hidden;
+    background: rgba(7,13,26,0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid #ffffff12;
+    cursor: pointer;
+    transition: border-color 0.14s, transform 0.14s;
+    text-decoration: none;
+    display: block;
+  }
+
+  .featured-card:hover { border-color: #ffffff1e; transform: translateY(-2px); }
+
+  .featured-card-img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+  }
+
+  .featured-card-img-inner {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.28s;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .featured-card:hover .featured-card-img-inner { transform: scale(1.04); }
+
+  .featured-card-body { padding: 13px; }
+
+  .featured-card-cat {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    display: inline-block;
+    border-radius: 4px;
+    padding: 2px 6px;
+    font-family: var(--font-heading);
+  }
+
+  .featured-card-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.88);
+    line-height: 1.4;
+    margin-bottom: 8px;
+    font-family: var(--font-body);
+  }
+
+  .featured-card-author {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    color: #555;
+    font-family: var(--font-body);
+  }
+
+  .author-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    font-size: 8px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+  }
+
+  /* ── POSTS LIST ── */
+  .posts-list { display: flex; flex-direction: column; gap: 1px; }
+
+  .post-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    padding: 11px;
+    border-radius: 11px;
+    cursor: pointer;
+    transition: background 0.12s;
+    text-decoration: none;
+  }
+
+  .post-item:hover { background: #ffffff08; }
+
+  .post-rank {
+    font-size: 11px;
+    font-weight: 700;
+    color: #3a3a3a;
+    width: 16px;
+    text-align: right;
+    padding-top: 2px;
+    flex-shrink: 0;
+    font-family: var(--font-heading);
+  }
+
+  .post-thumb-color {
+    width: 42px;
+    height: 42px;
+    border-radius: 8px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+  }
+
+  .post-info { flex: 1; min-width: 0; }
+
+  .post-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.45;
+    margin-bottom: 4px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-family: var(--font-body);
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 10px;
+    color: #4a4a4a;
+    font-family: var(--font-body);
+  }
+
+  .post-meta-dot { color: #2e2e2e; }
+
+  .post-cat {
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-radius: 3px;
+    padding: 2px 5px;
+    font-family: var(--font-heading);
+  }
+
+  /* ── MEMBERS LIST ── */
+  .member-list { display: flex; flex-direction: column; gap: 1px; }
+
+  .member-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 9px 10px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background 0.12s;
+  }
+
+  .member-item:hover { background: #ffffff08; }
+
+  .member-avatar-placeholder {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+    font-family: var(--font-heading);
+  }
+
+  .member-info { flex: 1; min-width: 0; }
+
+  .member-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    font-family: var(--font-body);
+  }
+
+  .member-role {
+    font-size: 10px;
+    color: #4a4a4a;
+    margin-top: 1px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-family: var(--font-body);
+  }
+
+  .member-action {
+    padding: 5px 11px;
+    border-radius: 7px;
+    font-size: 11px;
+    font-weight: 600;
+    background: #ffffff12;
+    color: rgba(255,255,255,0.6);
+    border: 1px solid #ffffff16;
+    cursor: pointer;
+    font-family: var(--font-body);
+    transition: background 0.12s;
+    flex-shrink: 0;
+  }
+
+  .member-action:hover { background: #ffffff20; color: #fff; }
+
+  /* ── SIDEBAR RIGHT ── */
+  .sidebar-right { display: flex; flex-direction: column; gap: 16px; padding-top: 4px; }
+
+  .widget {
+    background: rgba(7,13,26,0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid #ffffff12;
+    border-radius: 14px;
+    padding: 16px;
+  }
+
+  .widget-title {
+    font-size: 11px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-family: var(--font-heading);
+  }
+
+  /* Online users */
+  .online-list { display: flex; flex-direction: column; gap: 9px; }
+
+  .online-item { display: flex; align-items: center; gap: 8px; }
+
+  .online-dot {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #22c55e;
+    border: 2px solid #0d1828;
+  }
+
+  .online-name { font-size: 12px; font-weight: 500; color: rgba(255,255,255,0.6); font-family: var(--font-body); }
+
+  /* Activity */
+  .activity-list { display: flex; flex-direction: column; gap: 11px; }
+
+  .activity-item { display: flex; align-items: flex-start; gap: 8px; }
+
+  .activity-avatar {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 700;
+    font-family: var(--font-heading);
+  }
+
+  .activity-text {
+    font-size: 11px;
+    color: #555;
+    line-height: 1.55;
+    font-family: var(--font-body);
+  }
+
+  .activity-text strong { color: rgba(255,255,255,0.55); font-weight: 600; }
+  .activity-time { color: #3a3a3a; font-size: 10px; display: block; margin-top: 1px; }
+
+  /* Tags */
+  .tag-cloud { display: flex; flex-wrap: wrap; gap: 6px; }
+
+  .tag {
+    padding: 4px 10px;
+    border-radius: 100px;
+    background: #0f1e30;
+    border: 1px solid #ffffff0e;
+    font-size: 10px;
+    font-weight: 500;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.12s;
+    text-decoration: none;
+    display: inline-block;
+    font-family: var(--font-body);
+  }
+
+  .tag:hover { background: #ffffff12; color: #bbb; border-color: #ffffff20; }
+
+  /* ── FOOTER ── */
+  .footer {
+    background: rgba(5,10,22,0.75);
+    backdrop-filter: blur(16px);
+    border-top: 1px solid #ffffff10;
+    padding: 40px var(--pad-inner) 28px;
+  }
+
+  .footer-inner {
+    max-width: var(--innerWidth);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr repeat(4, auto);
+    gap: 48px;
+  }
+
+  .footer-tagline {
+    font-size: 11px;
+    color: #3a3a3a;
+    line-height: 1.6;
+    max-width: 200px;
+    margin-top: 8px;
+    font-family: var(--font-body);
+  }
+
+  .footer-col-title {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #3a3a3a;
+    margin-bottom: 10px;
+    font-family: var(--font-heading);
+  }
+
+  .footer-links { display: flex; flex-direction: column; gap: 7px; }
+
+  .footer-links a {
+    font-size: 12px;
+    color: #444;
+    text-decoration: none;
+    transition: color 0.12s;
+    font-family: var(--font-body);
+  }
+
+  .footer-links a:hover { color: #888; }
+
+  .footer-bottom {
+    max-width: var(--innerWidth);
+    margin: 24px auto 0;
+    padding-top: 18px;
+    border-top: 1px solid #ffffff06;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .footer-copy { font-size: 10px; color: #2e2e2e; font-family: var(--font-body); }
+</style>
+</head>
+<body>
+
+<canvas id="aurora-canvas"></canvas>
+
+<!-- HEADER -->
+<header class="header">
+  <div class="header-inner">
+    <a href="#" class="logo">
+      <img src="brand_assets/crew-automate-logo.jpeg" alt="Crew Automate" class="logo-img">
+    </a>
+    <nav class="nav">
+      <a href="#" class="active">Home</a>
+      <a href="#">Connect</a>
+      <a href="#">Inspire</a>
+      <a href="#">Learn</a>
+      <a href="#">Jobs</a>
+    </nav>
+    <div class="header-actions">
+      <button class="btn-sm btn-ghost">Sign in</button>
+      <button class="btn-sm btn-primary">Join free</button>
+    </div>
+  </div>
+</header>
+
+<!-- PAGE -->
+<div class="page">
+
+  <!-- LEFT SIDEBAR -->
+  <aside class="sidebar-left">
+    <span class="sidebar-section-label">Discover</span>
+    <a href="#" class="sidebar-link active">
+      <svg class="s-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+      Home
+    </a>
+    <a href="#" class="sidebar-link">
+      <svg class="s-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+      Members
+    </a>
+    <a href="#" class="sidebar-link">
+      <svg class="s-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/></svg>
+      Articles
+    </a>
+    <a href="#" class="sidebar-link">
+      <svg class="s-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+      Inspiration
+    </a>
+    <a href="#" class="sidebar-link">
+      <svg class="s-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+      Jobs
+    </a>
+
+    <span class="sidebar-section-label" style="margin-top:8px;">Categories</span>
+    <a href="#" class="sidebar-link"><span class="dot" style="background:#E8833A"></span>Connect</a>
+    <a href="#" class="sidebar-link"><span class="dot" style="background:#AAEEC4"></span>Inspire</a>
+    <a href="#" class="sidebar-link"><span class="dot" style="background:#3D8EC9"></span>Awards</a>
+    <a href="#" class="sidebar-link"><span class="dot" style="background:#c0ab3c"></span>Read</a>
+    <a href="#" class="sidebar-link"><span class="dot" style="background:#4AA8E0"></span>Learn</a>
+    <a href="#" class="sidebar-link"><span class="dot" style="background:#2E7A8A"></span>Jobs</a>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- HERO -->
+    <div class="hero-card">
+      <div style="position:relative; z-index:2;">
+        <div class="hero-tag"><span class="hero-tag-dot"></span>Community Platform</div>
+        <h1 class="hero-title">Crew Automate is a hub for builders and AI automation engineers</h1>
+        <p class="hero-body">Connect, learn, and build with thousands of AI engineers, no-code builders, prompt engineers, and automation specialists. Share workflows, find opportunities, and stay ahead of what's next.</p>
+        <div class="hero-actions">
+          <button class="btn-hero-primary">Join for free</button>
+          <button class="btn-hero-ghost">Explore content</button>
+        </div>
+        <div class="hero-stats">
+          <div class="hero-stat">
+            <span class="hero-stat-number">18k+</span>
+            <span class="hero-stat-label">Members</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-number">5.2k</span>
+            <span class="hero-stat-label">Articles</span>
+          </div>
+          <div class="hero-stat">
+            <span class="hero-stat-number">940</span>
+            <span class="hero-stat-label">Jobs posted</span>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual" style="z-index:2;">
+        <div class="hero-mini-card">
+          <div class="hero-mini-card-label">Trending today</div>
+          <div class="hero-mini-card-value">AI Agent Stacks</div>
+          <div class="hero-mini-card-sub">218 reactions</div>
+        </div>
+        <div class="hero-mini-card">
+          <div class="hero-mini-card-label">New member</div>
+          <div class="hero-mini-card-value">Alex M. joined</div>
+          <div class="hero-mini-card-sub">3 minutes ago</div>
+        </div>
+        <div class="hero-mini-card">
+          <div class="hero-mini-card-label">Hot job</div>
+          <div class="hero-mini-card-value">AI Eng. Lead</div>
+          <div class="hero-mini-card-sub">Remote · $180k</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- HIGHLIGHTS / CATEGORIES -->
+    <div>
+      <div class="section-header">
+        <span class="section-title">See the highlights of this community</span>
+        <a href="#" class="section-link">View all →</a>
+      </div>
+      <div class="category-grid">
+        <a href="#" class="category-card connect">
+          <div><span class="category-chip chip-connect">Connect</span></div>
+          <div class="category-card-title">Find collaborators &amp; clients</div>
+          <div class="category-card-count">3,640 members active</div>
+        </a>
+        <a href="#" class="category-card inspire">
+          <div><span class="category-chip chip-inspire">Inspire</span></div>
+          <div class="category-card-title">Showcase automations &amp; builds</div>
+          <div class="category-card-count">1,820 workflows shared</div>
+        </a>
+        <a href="#" class="category-card awards">
+          <div><span class="category-chip chip-awards">Awards</span></div>
+          <div class="category-card-title">Recognize outstanding automation</div>
+          <div class="category-card-count">96 nominees this month</div>
+        </a>
+        <a href="#" class="category-card read">
+          <div><span class="category-chip chip-read">Read</span></div>
+          <div class="category-card-title">Articles &amp; deep dives</div>
+          <div class="category-card-count">5,200 articles published</div>
+        </a>
+        <a href="#" class="category-card learn">
+          <div><span class="category-chip chip-learn">Learn</span></div>
+          <div class="category-card-title">Tutorials &amp; AI resources</div>
+          <div class="category-card-count">420 guides available</div>
+        </a>
+        <a href="#" class="category-card jobs">
+          <div><span class="category-chip chip-jobs">Jobs</span></div>
+          <div class="category-card-title">Freelance &amp; full-time AI roles</div>
+          <div class="category-card-count">940 open positions</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- FEATURED THIS WEEK -->
+    <div>
+      <div class="section-header">
+        <span class="section-title">Featured this week</span>
+        <a href="#" class="section-link">See more →</a>
+      </div>
+      <div class="featured-row">
+        <a href="#" class="featured-card">
+          <div class="featured-card-img">
+            <div class="featured-card-img-inner" style="background: linear-gradient(135deg, #071829 0%, #0d3260 60%, #3D8EC9 100%);"></div>
+          </div>
+          <div class="featured-card-body">
+            <span class="featured-card-cat" style="background:#3d8ec918; color:#7ec4e8;">Awards</span>
+            <div class="featured-card-title">Best AI Agent Build of the Quarter</div>
+            <div class="featured-card-author">
+              <div class="author-dot" style="background:#3D8EC9; color:#fff;">RK</div>
+              <span>Ryan K. · 3 days ago</span>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="featured-card">
+          <div class="featured-card-img">
+            <div class="featured-card-img-inner" style="background: linear-gradient(135deg, #0a2e1a 0%, #0d6b3b 60%, #AAEEC4 100%);"></div>
+          </div>
+          <div class="featured-card-body">
+            <span class="featured-card-cat" style="background:#aaeec418; color:#AAEEC4;">Inspire</span>
+            <div class="featured-card-title">I automated my entire client onboarding in 48 hours</div>
+            <div class="featured-card-author">
+              <div class="author-dot" style="background:#AAEEC4; color:#0a2e1a;">JT</div>
+              <span>Jamie T. · 1 week ago</span>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="featured-card">
+          <div class="featured-card-img">
+            <div class="featured-card-img-inner" style="background: linear-gradient(135deg, #1a1600 0%, #7a6a1a 60%, #c0ab3c 100%);"></div>
+          </div>
+          <div class="featured-card-body">
+            <span class="featured-card-cat" style="background:#c0ab3c18; color:#c0ab3c;">Read</span>
+            <div class="featured-card-title">The real cost of building with LLMs in production</div>
+            <div class="featured-card-author">
+              <div class="author-dot" style="background:#c0ab3c; color:#1a1600;">AL</div>
+              <span>Ana L. · 5 days ago</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- TRENDING POSTS -->
+    <div>
+      <div class="section-header">
+        <span class="section-title">Trending posts</span>
+        <a href="#" class="section-link">See all →</a>
+      </div>
+      <div class="posts-list">
+        <a href="#" class="post-item">
+          <span class="post-rank">1</span>
+          <div class="post-thumb-color" style="background: linear-gradient(135deg, #0d2840, #3D8EC9);">🏆</div>
+          <div class="post-info">
+            <div class="post-title">Announcing the 2025 Crew Automate Automation Awards shortlist</div>
+            <div class="post-meta">
+              <span class="post-cat" style="background:#3d8ec918; color:#7ec4e8;">Awards</span>
+              <span class="post-meta-dot">·</span>
+              <span>412 reactions</span>
+              <span class="post-meta-dot">·</span>
+              <span>2 days ago</span>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="post-item">
+          <span class="post-rank">2</span>
+          <div class="post-thumb-color" style="background: linear-gradient(135deg, #0a2e1a, #22c55e);">✨</div>
+          <div class="post-info">
+            <div class="post-title">30 AI automation workflows that blew our minds this month</div>
+            <div class="post-meta">
+              <span class="post-cat" style="background:#aaeec418; color:#AAEEC4;">Inspire</span>
+              <span class="post-meta-dot">·</span>
+              <span>318 reactions</span>
+              <span class="post-meta-dot">·</span>
+              <span>3 days ago</span>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="post-item">
+          <span class="post-rank">3</span>
+          <div class="post-thumb-color" style="background: linear-gradient(135deg, #2a1208, #E8833A);">🔥</div>
+          <div class="post-info">
+            <div class="post-title">I raised my AI consulting rate by 60% — here's exactly what I said</div>
+            <div class="post-meta">
+              <span class="post-cat" style="background:#e8833a18; color:#E8833A;">Connect</span>
+              <span class="post-meta-dot">·</span>
+              <span>267 reactions</span>
+              <span class="post-meta-dot">·</span>
+              <span>4 days ago</span>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="post-item">
+          <span class="post-rank">4</span>
+          <div class="post-thumb-color" style="background: linear-gradient(135deg, #1a1600, #c0ab3c);">📖</div>
+          <div class="post-info">
+            <div class="post-title">Why most AI agents fail in production (and how to fix it)</div>
+            <div class="post-meta">
+              <span class="post-cat" style="background:#c0ab3c18; color:#c0ab3c;">Read</span>
+              <span class="post-meta-dot">·</span>
+              <span>194 reactions</span>
+              <span class="post-meta-dot">·</span>
+              <span>5 days ago</span>
+            </div>
+          </div>
+        </a>
+        <a href="#" class="post-item">
+          <span class="post-rank">5</span>
+          <div class="post-thumb-color" style="background: linear-gradient(135deg, #071420, #2E7A8A);">💼</div>
+          <div class="post-info">
+            <div class="post-title">Head of AI Automation at Notion — remote, up to $220k</div>
+            <div class="post-meta">
+              <span class="post-cat" style="background:#2e7a8a18; color:#2E7A8A;">Jobs</span>
+              <span class="post-meta-dot">·</span>
+              <span>148 reactions</span>
+              <span class="post-meta-dot">·</span>
+              <span>1 day ago</span>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- NEW MEMBERS -->
+    <div>
+      <div class="section-header">
+        <span class="section-title">New members this week</span>
+        <a href="#" class="section-link">See all →</a>
+      </div>
+      <div class="member-list">
+        <div class="member-item">
+          <div class="member-avatar-placeholder" style="background:#3d8ec918; color:#7ec4e8;">RF</div>
+          <div class="member-info">
+            <div class="member-name">Ryan Fontaine</div>
+            <div class="member-role">AI Engineer · San Francisco, USA</div>
+          </div>
+          <button class="member-action">Follow</button>
+        </div>
+        <div class="member-item">
+          <div class="member-avatar-placeholder" style="background:#e8833a18; color:#E8833A;">MO</div>
+          <div class="member-info">
+            <div class="member-name">Marcus Okonkwo</div>
+            <div class="member-role">Automation Consultant · Lagos, Nigeria</div>
+          </div>
+          <button class="member-action">Follow</button>
+        </div>
+        <div class="member-item">
+          <div class="member-avatar-placeholder" style="background:#aaeec418; color:#AAEEC4;">LP</div>
+          <div class="member-info">
+            <div class="member-name">Lena Park</div>
+            <div class="member-role">Prompt Engineer · Seoul, South Korea</div>
+          </div>
+          <button class="member-action">Follow</button>
+        </div>
+        <div class="member-item">
+          <div class="member-avatar-placeholder" style="background:#2e7a8a18; color:#2E7A8A;">DM</div>
+          <div class="member-info">
+            <div class="member-name">Diego Martinez</div>
+            <div class="member-role">No-Code Builder · Mexico City, Mexico</div>
+          </div>
+          <button class="member-action">Follow</button>
+        </div>
+        <div class="member-item">
+          <div class="member-avatar-placeholder" style="background:#c0ab3c18; color:#c0ab3c;">JB</div>
+          <div class="member-info">
+            <div class="member-name">Julia Brennan</div>
+            <div class="member-role">LLM Researcher · New York, USA</div>
+          </div>
+          <button class="member-action">Follow</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- RIGHT SIDEBAR -->
+  <aside class="sidebar-right">
+
+    <div class="widget">
+      <div class="widget-title">Currently online</div>
+      <div class="online-list">
+        <div class="online-item">
+          <div style="position:relative; width:28px; height:28px; flex-shrink:0;">
+            <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#0d2840,#3D8EC9);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;font-family:var(--font-heading);">R</div>
+            <span class="online-dot"></span>
+          </div>
+          <span class="online-name">Reza A.</span>
+        </div>
+        <div class="online-item">
+          <div style="position:relative; width:28px; height:28px; flex-shrink:0;">
+            <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#E8833A,#ffae94);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;font-family:var(--font-heading);">C</div>
+            <span class="online-dot"></span>
+          </div>
+          <span class="online-name">Clara V.</span>
+        </div>
+        <div class="online-item">
+          <div style="position:relative; width:28px; height:28px; flex-shrink:0;">
+            <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#22c55e,#AAEEC4);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#0a2e1a;font-family:var(--font-heading);">T</div>
+            <span class="online-dot"></span>
+          </div>
+          <span class="online-name">Tomás B.</span>
+        </div>
+        <div class="online-item">
+          <div style="position:relative; width:28px; height:28px; flex-shrink:0;">
+            <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#8a7010,#c0ab3c);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;font-family:var(--font-heading);">N</div>
+            <span class="online-dot"></span>
+          </div>
+          <span class="online-name">Nadia O.</span>
+        </div>
+        <div class="online-item">
+          <div style="position:relative; width:28px; height:28px; flex-shrink:0;">
+            <div style="width:28px;height:28px;border-radius:50%;background:linear-gradient(135deg,#2E7A8A,#4AA8E0);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;color:#fff;font-family:var(--font-heading);">H</div>
+            <span class="online-dot"></span>
+          </div>
+          <span class="online-name">Hannah W.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="widget">
+      <div class="widget-title">Recent activity</div>
+      <div class="activity-list">
+        <div class="activity-item">
+          <div class="activity-avatar" style="background:#3d8ec918; color:#7ec4e8;">R</div>
+          <div class="activity-text"><strong>Ryan K.</strong> posted in Awards<span class="activity-time">4 min ago</span></div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-avatar" style="background:#e8833a18; color:#E8833A;">J</div>
+          <div class="activity-text"><strong>Jamie T.</strong> shared a new workflow<span class="activity-time">12 min ago</span></div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-avatar" style="background:#aaeec418; color:#AAEEC4;">L</div>
+          <div class="activity-text"><strong>Lena P.</strong> joined Crew Automate<span class="activity-time">28 min ago</span></div>
+        </div>
+        <div class="activity-item">
+          <div class="activity-avatar" style="background:#c0ab3c18; color:#c0ab3c;">D</div>
+          <div class="activity-text"><strong>Diego M.</strong> published a new guide<span class="activity-time">1 hour ago</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="widget">
+      <div class="widget-title">Popular tags</div>
+      <div class="tag-cloud">
+        <a href="#" class="tag">#aiagents</a>
+        <a href="#" class="tag">#automation</a>
+        <a href="#" class="tag">#nocode</a>
+        <a href="#" class="tag">#llm</a>
+        <a href="#" class="tag">#prompteng</a>
+        <a href="#" class="tag">#n8n</a>
+        <a href="#" class="tag">#make</a>
+        <a href="#" class="tag">#zapier</a>
+        <a href="#" class="tag">#openai</a>
+        <a href="#" class="tag">#langchain</a>
+        <a href="#" class="tag">#rag</a>
+        <a href="#" class="tag">#aiops</a>
+      </div>
+    </div>
+
+    <div class="widget">
+      <div class="widget-title">About Crew Automate</div>
+      <p style="font-size:11px; color:#444; line-height:1.7; margin-bottom:10px; font-family:var(--font-body);">Crew Automate is a community hub for engineers, builders, and enthusiasts shaping the future of intelligent automation.</p>
+      <div style="display:flex; gap:10px; font-size:10px;">
+        <a href="#" style="color:#444; text-decoration:none; font-family:var(--font-body);">Privacy</a>
+        <a href="#" style="color:#444; text-decoration:none; font-family:var(--font-body);">Terms</a>
+        <a href="#" style="color:#444; text-decoration:none; font-family:var(--font-body);">Contact</a>
+      </div>
+    </div>
+
+  </aside>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div>
+      <a href="#" class="logo">
+        <img src="brand_assets/crew-automate-logo.jpeg" alt="Crew Automate" class="logo-img">
+      </a>
+      <p class="footer-tagline">The hub for AI engineers and automation builders around the world.</p>
+    </div>
+    <div>
+      <div class="footer-col-title">Platform</div>
+      <div class="footer-links">
+        <a href="#">Home</a>
+        <a href="#">Connect</a>
+        <a href="#">Inspire</a>
+        <a href="#">Awards</a>
+        <a href="#">Jobs</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Community</div>
+      <div class="footer-links">
+        <a href="#">Members</a>
+        <a href="#">Articles</a>
+        <a href="#">Events</a>
+        <a href="#">Newsletter</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Resources</div>
+      <div class="footer-links">
+        <a href="#">Learn</a>
+        <a href="#">Tutorials</a>
+        <a href="#">Guides</a>
+        <a href="#">Templates</a>
+      </div>
+    </div>
+    <div>
+      <div class="footer-col-title">Company</div>
+      <div class="footer-links">
+        <a href="#">About</a>
+        <a href="#">Blog</a>
+        <a href="#">Careers</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2025 Crew Automate. All rights reserved.</span>
+    <span class="footer-copy">Built for builders, by builders.</span>
+  </div>
+</footer>
+
+<script>
+(function () {
+  const canvas = document.getElementById('aurora-canvas');
+  const parent = canvas.parentElement;
+  const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+  if (!gl) return;
+
+  const vertSrc = `
+    attribute vec2 position;
+    void main() {
+      gl_Position = vec4(position, 0.0, 1.0);
+    }
+  `;
+
+  const fragSrc = `
+    #ifdef GL_ES
+    precision mediump float;
+    #endif
+
+    uniform vec2 uResolution;
+    uniform float uTime;
+    uniform float uSpeed;
+    uniform float uGlow;
+
+    vec3 palette(float t) {
+      vec3 a = vec3(0.5, 0.5, 0.5);
+      vec3 b = vec3(0.5, 0.5, 0.5);
+      vec3 c = vec3(1.0, 1.0, 1.0);
+      vec3 d = vec3(0.10, 0.30, 0.65);
+      return a + b * cos(6.28318 * (c * t + d));
+    }
+
+    float wave(vec2 uv, float freq, float phase) {
+      return 0.35 * sin(uv.x * freq + uTime * uSpeed + phase);
+    }
+
+    float glow(float d, float strength) {
+      return exp(-d * d * strength);
+    }
+
+    void main() {
+      vec2 uv = (gl_FragCoord.xy / uResolution.xy) * 2.0 - 1.0;
+      uv.x *= uResolution.x / uResolution.y;
+
+      float y = uv.y;
+
+      float w1 = wave(uv, 2.5, 0.0);
+      float w2 = wave(uv, 4.5, 1.2);
+      float w3 = wave(uv, 6.5, 2.8);
+      float waveLine = w1 + w2 * 0.5 + w3 * 0.3;
+
+      float dist = abs(y - waveLine);
+
+      // Multiple glow bands for layered aurora feel
+      float g1 = glow(dist, 8.0);
+      float g2 = glow(dist, 28.0);
+      float g3 = glow(dist * 0.5, 3.0);
+
+      vec3 col1 = palette(waveLine * 0.6 + uTime * 0.08);
+      vec3 col2 = palette(waveLine * 0.6 + uTime * 0.08 + 0.33);
+
+      vec3 bg = vec3(0.025, 0.06, 0.13);
+      vec3 col = bg;
+      col += col1 * g1 * 1.8;
+      col += col2 * g2 * 2.5;
+      col += col1 * g3 * 0.25;
+
+      gl_FragColor = vec4(col, 1.0);
+    }
+  `;
+
+  function createShader(type, src) {
+    const s = gl.createShader(type);
+    gl.shaderSource(s, src);
+    gl.compileShader(s);
+    return s;
+  }
+
+  const vert = createShader(gl.VERTEX_SHADER, vertSrc);
+  const frag = createShader(gl.FRAGMENT_SHADER, fragSrc);
+  const prog = gl.createProgram();
+  gl.attachShader(prog, vert);
+  gl.attachShader(prog, frag);
+  gl.linkProgram(prog);
+  gl.useProgram(prog);
+
+  // Full-screen triangle (covers -1 to 1 clip space)
+  const verts = new Float32Array([-1, -1, 3, -1, -1, 3]);
+  const buf = gl.createBuffer();
+  gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+  gl.bufferData(gl.ARRAY_BUFFER, verts, gl.STATIC_DRAW);
+
+  const posLoc = gl.getAttribLocation(prog, 'position');
+  gl.enableVertexAttribArray(posLoc);
+  gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+  const uTime = gl.getUniformLocation(prog, 'uTime');
+  const uRes  = gl.getUniformLocation(prog, 'uResolution');
+  const uSpeed = gl.getUniformLocation(prog, 'uSpeed');
+  const uGlow  = gl.getUniformLocation(prog, 'uGlow');
+
+  gl.uniform1f(uSpeed, 0.5);
+  gl.uniform1f(uGlow, 8.0);
+
+  function resize() {
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width  = w * dpr;
+    canvas.height = h * dpr;
+    gl.viewport(0, 0, canvas.width, canvas.height);
+    gl.uniform2f(uRes, w, h);
+  }
+
+  window.addEventListener('resize', resize);
+  resize();
+
+  const start = performance.now();
+  function loop() {
+    gl.uniform1f(uTime, (performance.now() - start) / 1000);
+    gl.drawArrays(gl.TRIANGLES, 0, 3);
+    requestAnimationFrame(loop);
+  }
+  loop();
+})();
+</script>
+</body>
+</html>

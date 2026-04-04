@@ -1,0 +1,25 @@
+node_modules/
+.DS_Store
+.CFUserTextEncoding
+.zsh_history
+.zsh_sessions/
+.zprofile
+.zprofile.pysave
+.npm/
+.cache/
+.idlerc/
+.claude.json
+.claude/
+.vscode/
+.ollama/
+.n8n-mcp/
+Applications/
+Desktop/
+Documents/
+Downloads/
+Library/
+Movies/
+Music/
+Pictures/
+Public/
+temporary screenshots/
