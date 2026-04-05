@@ -422,6 +422,38 @@
           <input type="email" id="email" name="email" placeholder="you@example.com" required />
         </div>
 
+        <div class="form-row">
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input type="tel" id="phone" name="phone" placeholder="+1 (555) 000-0000" />
+          </div>
+          <div class="form-group">
+            <label for="country">Country</label>
+            <select id="country" name="country" required>
+              <option value="" disabled selected>Select country</option>
+              <option value="us">United States</option>
+              <option value="ca">Canada</option>
+              <option value="gb">United Kingdom</option>
+              <option value="au">Australia</option>
+              <option value="de">Germany</option>
+              <option value="fr">France</option>
+              <option value="in">India</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="company">Company / Organization</label>
+            <input type="text" id="company" name="company" placeholder="Acme Corp" />
+          </div>
+          <div class="form-group">
+            <label for="website">Website (optional)</label>
+            <input type="url" id="website" name="website" placeholder="https://yoursite.com" />
+          </div>
+        </div>
+
         <div class="form-group">
           <label for="role">Your Role</label>
           <select id="role" name="role" required>
@@ -431,6 +463,7 @@
             <option value="operator">Operator / Founder</option>
             <option value="developer">Software Developer</option>
             <option value="consultant">Consultant / Agency</option>
+            <option value="marketer">Marketer</option>
             <option value="other">Other</option>
           </select>
         </div>
