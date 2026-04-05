@@ -116,17 +116,48 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: var(--dark-bg) !important;
-      background: var(--teal);
+      background: linear-gradient(135deg, var(--teal), var(--blue));
       padding: 9px 22px;
       border-radius: 4px;
       text-decoration: none;
-      transition: background 0.2s, transform 0.2s !important;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s !important;
+      box-shadow:
+        0 2px 12px rgba(0, 196, 212, 0.35),
+        inset 0 1px 0 rgba(255,255,255,0.35),
+        inset 0 -1px 0 rgba(0,0,0,0.12);
+    }
+
+    .nav-cta::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 50%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0) 100%);
+      border-radius: 4px 4px 0 0;
+      pointer-events: none;
+    }
+
+    .nav-cta::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.3), transparent);
+      transform: skewX(-20deg);
+      animation: shimmer 3s ease-in-out infinite;
+      pointer-events: none;
     }
 
     .nav-cta:hover {
-      background: var(--blue) !important;
-      color: var(--white) !important;
+      color: var(--dark-bg) !important;
       transform: translateY(-1px);
+      box-shadow:
+        0 4px 20px rgba(0, 196, 212, 0.5),
+        inset 0 1px 0 rgba(255,255,255,0.4),
+        inset 0 -1px 0 rgba(0,0,0,0.12);
     }
 
     /* ─── HERO ───────────────────────────────────────────── */
@@ -210,14 +241,54 @@
       text-decoration: none;
       border: none;
       cursor: pointer;
+      position: relative;
+      overflow: hidden;
       transition: transform 0.2s, box-shadow 0.2s;
-      box-shadow: 0 4px 24px rgba(0, 196, 212, 0.3);
+      box-shadow:
+        0 4px 24px rgba(0, 196, 212, 0.35),
+        inset 0 1px 0 rgba(255,255,255,0.35),
+        inset 0 -1px 0 rgba(0,0,0,0.15);
+    }
+
+    /* top gloss layer */
+    .btn-primary::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 50%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.22) 0%, rgba(255,255,255,0) 100%);
+      border-radius: 4px 4px 0 0;
+      pointer-events: none;
+    }
+
+    /* shimmer sweep */
+    .btn-primary::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(120deg, transparent, rgba(255,255,255,0.32), transparent);
+      transform: skewX(-20deg);
+      animation: shimmer 3s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes shimmer {
+      0%   { left: -75%; }
+      60%  { left: 125%; }
+      100% { left: 125%; }
     }
 
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(0, 196, 212, 0.45);
+      box-shadow:
+        0 8px 32px rgba(0, 196, 212, 0.5),
+        inset 0 1px 0 rgba(255,255,255,0.4),
+        inset 0 -1px 0 rgba(0,0,0,0.15);
     }
+
+    .btn-primary:active { transform: translateY(0); }
 
     .btn-secondary {
       font-family: var(--mono);
@@ -933,7 +1004,7 @@
     <li><a href="#features">Features</a></li>
     <li><a href="#how">How It Works</a></li>
     <li><a href="#community">Community</a></li>
-    <li><a href="#join" class="nav-cta">Join Free</a></li>
+    <li><a href="join.html" class="nav-cta">Join Free</a></li>
   </ul>
 </nav>
 
@@ -946,7 +1017,7 @@
     Crew Automate is the community where automation builders, AI engineers, and operators share workflows, tools, and strategies to build smarter systems — together.
   </p>
   <div class="hero-actions">
-    <a href="#join" class="btn-primary">Join the Community</a>
+    <a href="join.html" class="btn-primary">Join the Community</a>
     <a href="#about" class="btn-secondary">Learn More</a>
   </div>
   <div class="hero-scroll">
@@ -1158,7 +1229,7 @@
       <h2>Start automating<br /><span class="accent">with your crew.</span></h2>
       <p>Free to join. No fluff. Just serious builders doing serious things with automation.</p>
       <div class="cta-actions">
-        <a href="#" class="btn-primary">Join Crew Automate — Free</a>
+        <a href="join.html" class="btn-primary">Join Crew Automate — Free</a>
         <a href="#features" class="btn-secondary">View Resources First</a>
       </div>
     </div>
@@ -1182,7 +1253,7 @@
       <div class="footer-col">
         <h4>Community</h4>
         <ul>
-          <li><a href="#">Join Free</a></li>
+          <li><a href="join.html">Join Free</a></li>
           <li><a href="#">Resource Library</a></li>
           <li><a href="#">Workflow Templates</a></li>
           <li><a href="#">Tool Directory</a></li>
