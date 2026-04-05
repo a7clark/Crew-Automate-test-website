@@ -131,8 +131,13 @@
 
   .btn-ghost:hover { color: #fff; border-color: #ffffff40; }
 
+  @keyframes shimmer {
+    0%   { transform: translateX(-120%) skewX(-15deg); }
+    100% { transform: translateX(220%) skewX(-15deg); }
+  }
+
   .btn-primary {
-    background: linear-gradient(135deg, #4AAEE0 0%, #2a7ab8 100%);
+    background: linear-gradient(135deg, #5ec4f8 0%, #3D8EC9 50%, #1e6aaa 100%);
     color: #fff;
     border: none;
     border-radius: 100px;
@@ -140,27 +145,48 @@
     position: relative;
     overflow: hidden;
     box-shadow:
-      0 2px 8px rgba(61,142,201,0.5),
-      0 1px 2px rgba(0,0,0,0.2),
-      inset 0 1px 0 rgba(255,255,255,0.18);
+      0 0 0 1px rgba(255,255,255,0.15) inset,
+      0 2px 12px rgba(61,180,255,0.65),
+      0 4px 24px rgba(61,142,201,0.4),
+      0 1px 2px rgba(0,0,0,0.25);
     transition: transform 0.15s cubic-bezier(.22,.68,0,1.2), box-shadow 0.15s ease;
   }
 
-  .btn-primary::after {
+  /* top gloss */
+  .btn-primary::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(255,255,255,0.14) 0%, transparent 55%);
-    pointer-events: none;
+    background: linear-gradient(180deg,
+      rgba(255,255,255,0.38) 0%,
+      rgba(255,255,255,0.08) 45%,
+      transparent 100%);
     border-radius: inherit;
+    pointer-events: none;
+  }
+
+  /* sweep shimmer */
+  .btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 0; width: 40%;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255,255,255,0.45) 50%,
+      transparent 100%);
+    border-radius: inherit;
+    pointer-events: none;
+    animation: shimmer 2.4s ease-in-out infinite;
   }
 
   .btn-primary:hover {
-    background: linear-gradient(135deg, #5bc0f8 0%, #3D8EC9 100%);
+    background: linear-gradient(135deg, #72d0ff 0%, #4AAEE0 50%, #2a7ab8 100%);
     box-shadow:
-      0 4px 16px rgba(61,142,201,0.6),
-      0 2px 4px rgba(0,0,0,0.2),
-      inset 0 1px 0 rgba(255,255,255,0.2);
+      0 0 0 1px rgba(255,255,255,0.22) inset,
+      0 2px 16px rgba(100,210,255,0.75),
+      0 6px 32px rgba(61,142,201,0.55),
+      0 1px 4px rgba(0,0,0,0.2);
     transform: translateY(-1px);
   }
 
@@ -317,7 +343,7 @@
 
   .btn-hero-primary {
     padding: 13px 28px;
-    background: linear-gradient(135deg, #4AAEE0 0%, #2272b0 100%);
+    background: linear-gradient(135deg, #5ec4f8 0%, #3D8EC9 50%, #1e6aaa 100%);
     color: #fff;
     border: none;
     border-radius: 100px;
@@ -328,35 +354,56 @@
     letter-spacing: 0.06em;
     text-transform: uppercase;
     box-shadow:
-      0 4px 20px rgba(61,142,201,0.55),
-      0 2px 6px rgba(0,0,0,0.25),
-      inset 0 1px 0 rgba(255,255,255,0.22);
+      0 0 0 1px rgba(255,255,255,0.18) inset,
+      0 4px 24px rgba(61,180,255,0.7),
+      0 8px 40px rgba(61,142,201,0.45),
+      0 2px 6px rgba(0,0,0,0.3);
     transition: transform 0.18s cubic-bezier(.22,.68,0,1.2), box-shadow 0.18s ease;
     position: relative;
     overflow: hidden;
   }
 
-  .btn-hero-primary::after {
+  /* top gloss */
+  .btn-hero-primary::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, rgba(255,255,255,0.16) 0%, transparent 55%);
-    pointer-events: none;
+    background: linear-gradient(180deg,
+      rgba(255,255,255,0.42) 0%,
+      rgba(255,255,255,0.08) 45%,
+      transparent 100%);
     border-radius: inherit;
+    pointer-events: none;
+  }
+
+  /* sweep shimmer */
+  .btn-hero-primary::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    left: 0; width: 40%;
+    background: linear-gradient(90deg,
+      transparent 0%,
+      rgba(255,255,255,0.5) 50%,
+      transparent 100%);
+    border-radius: inherit;
+    pointer-events: none;
+    animation: shimmer 2.4s ease-in-out infinite;
   }
 
   .btn-hero-primary:hover {
-    background: linear-gradient(135deg, #5bbcf8 0%, #3D8EC9 100%);
+    background: linear-gradient(135deg, #72d0ff 0%, #4AAEE0 50%, #2a7ab8 100%);
     box-shadow:
-      0 6px 28px rgba(61,142,201,0.65),
-      0 3px 8px rgba(0,0,0,0.25),
-      inset 0 1px 0 rgba(255,255,255,0.25);
+      0 0 0 1px rgba(255,255,255,0.25) inset,
+      0 4px 32px rgba(100,210,255,0.8),
+      0 10px 48px rgba(61,142,201,0.55),
+      0 2px 8px rgba(0,0,0,0.25);
     transform: translateY(-2px);
   }
 
   .btn-hero-primary:active {
     transform: translateY(0px);
-    box-shadow: 0 1px 4px rgba(61,142,201,0.4);
+    box-shadow: 0 1px 8px rgba(61,142,201,0.5);
   }
 
   .btn-hero-ghost {
