@@ -954,6 +954,94 @@
       transform: translateY(0);
     }
 
+    /* ─── BLUEPRINT VIDEO ───────────────────────────────────── */
+    .blueprint-section {
+      position: relative;
+      z-index: 1;
+      padding: 100px 0;
+    }
+
+    .blueprint-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 6vw;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 56px;
+    }
+
+    .blueprint-header {
+      text-align: center;
+      max-width: 660px;
+    }
+
+    .blueprint-video-wrap {
+      position: relative;
+      width: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 1px solid rgba(0, 196, 212, 0.22);
+      box-shadow:
+        0 0 0 1px rgba(0, 196, 212, 0.06) inset,
+        0 4px 48px rgba(0, 196, 212, 0.12),
+        0 24px 80px rgba(0, 0, 0, 0.55);
+    }
+
+    .blueprint-video {
+      width: 100%;
+      display: block;
+      max-height: 540px;
+      object-fit: cover;
+      border-radius: 16px;
+    }
+
+    .blueprint-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(8, 14, 26, 0.18) 0%,
+        transparent 30%,
+        transparent 70%,
+        rgba(8, 14, 26, 0.55) 100%
+      );
+      pointer-events: none;
+      border-radius: 16px;
+    }
+
+    .blueprint-badge {
+      position: absolute;
+      bottom: 24px;
+      right: 24px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(8, 14, 26, 0.75);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(0, 196, 212, 0.25);
+      border-radius: 100px;
+      padding: 8px 16px 8px 10px;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--teal);
+    }
+
+    .blueprint-badge-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--teal);
+      animation: blink 1.6s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.2; }
+    }
+
     /* ─── RESPONSIVE ─────────────────────────────────────── */
     @media (max-width: 900px) {
       .nav-links { display: none; }
@@ -1117,6 +1205,33 @@
         <div class="feature-icon">🚀</div>
         <div class="feature-title">Early Access & Drops</div>
         <p class="feature-desc">Be first to access new tools, templates, and resources before they go public. Members always get priority.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── BLUEPRINT VIDEO ─────────────────────────────────────── -->
+<section class="blueprint-section" id="blueprint">
+  <div class="blueprint-inner">
+    <div class="blueprint-header reveal">
+      <div class="section-tag">// The Blueprint</div>
+      <h2 class="section-title">Built on a solid<br /><span class="accent">foundation.</span></h2>
+      <p class="section-sub">Every great automation system starts with a clear blueprint. We give you the architectural plan — so you build right the first time.</p>
+    </div>
+    <div class="blueprint-video-wrap reveal">
+      <video
+        class="blueprint-video"
+        src="blueprint-loop.mp4"
+        poster="brand_assets/Blueprint.png"
+        autoplay
+        muted
+        loop
+        playsinline
+      ></video>
+      <div class="blueprint-overlay"></div>
+      <div class="blueprint-badge">
+        <div class="blueprint-badge-dot"></div>
+        AI-Generated Loop
       </div>
     </div>
   </div>
