@@ -1042,9 +1042,341 @@
       50%       { opacity: 0.2; }
     }
 
+    /* ─── MARQUEE ───────────────────────────────────────────── */
+    .marquee-section {
+      position: relative; z-index: 1;
+      padding: 28px 0;
+      border-top: 1px solid rgba(17,166,201,0.1);
+      border-bottom: 1px solid rgba(17,166,201,0.1);
+      background: rgba(13,21,37,0.6);
+      overflow: hidden;
+    }
+
+    .marquee-label {
+      position: absolute; left: 0; top: 0; bottom: 0;
+      width: 120px;
+      background: linear-gradient(to right, var(--dark-bg) 60%, transparent);
+      z-index: 2;
+      display: flex; align-items: center;
+      padding-left: 6vw;
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--light-grey);
+      white-space: nowrap;
+    }
+
+    .marquee-label-right {
+      position: absolute; right: 0; top: 0; bottom: 0;
+      width: 80px;
+      background: linear-gradient(to left, var(--dark-bg) 60%, transparent);
+      z-index: 2;
+    }
+
+    .marquee-track {
+      display: flex; gap: 0;
+      animation: marqueeScroll 30s linear infinite;
+      width: max-content;
+    }
+
+    .marquee-track:hover { animation-play-state: paused; }
+
+    @keyframes marqueeScroll {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    .marquee-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 0 32px;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      color: var(--light-grey);
+      white-space: nowrap;
+      transition: color 0.2s;
+    }
+
+    .marquee-item:hover { color: var(--teal); }
+
+    .marquee-dot {
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--teal);
+      opacity: 0.4;
+      flex-shrink: 0;
+    }
+
+    /* ─── HERO UPGRADES ──────────────────────────────────────── */
+    .hero-trust {
+      display: flex; align-items: center; gap: 24px;
+      margin-top: 20px;
+      flex-wrap: wrap; justify-content: center;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.85s forwards;
+    }
+
+    .trust-item {
+      display: flex; align-items: center; gap: 6px;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--light-grey);
+    }
+
+    .trust-item svg { opacity: 0.6; flex-shrink: 0; }
+
+    .hero h1 .gradient-text {
+      background: linear-gradient(135deg, var(--teal) 0%, #72e4f0 50%, var(--blue) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ─── PRICING ────────────────────────────────────────────── */
+    .pricing-section { position: relative; z-index: 1; padding: 100px 0; }
+
+    .pricing-inner {
+      max-width: 1140px; margin: 0 auto; padding: 0 6vw;
+    }
+
+    .pricing-header { text-align: center; margin-bottom: 60px; }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .pricing-card {
+      background: rgba(13,21,37,0.8);
+      border: 1px solid rgba(17,166,201,0.12);
+      border-radius: 16px;
+      padding: 36px 32px;
+      position: relative;
+      transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(0,196,212,0.3);
+      box-shadow: 0 12px 48px rgba(0,196,212,0.1);
+    }
+
+    .pricing-card.featured {
+      border-color: rgba(0,196,212,0.4);
+      background: linear-gradient(160deg, rgba(13,21,37,0.95), rgba(26,58,92,0.3));
+      box-shadow: 0 4px 48px rgba(0,196,212,0.12);
+    }
+
+    .pricing-badge {
+      position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+      background: linear-gradient(135deg, var(--teal), var(--blue));
+      color: var(--dark-bg);
+      font-family: var(--mono);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 4px 16px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+
+    .pricing-tier {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 16px;
+    }
+
+    .pricing-price {
+      display: flex; align-items: flex-end; gap: 4px;
+      margin-bottom: 8px;
+    }
+
+    .price-num {
+      font-family: var(--mono);
+      font-size: 3rem;
+      font-weight: 700;
+      line-height: 1;
+      color: var(--white);
+    }
+
+    .price-per {
+      font-size: 0.8rem;
+      color: var(--light-grey);
+      margin-bottom: 6px;
+    }
+
+    .pricing-desc {
+      font-size: 0.85rem;
+      color: var(--light-grey);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .pricing-divider {
+      border: none;
+      border-top: 1px solid rgba(17,166,201,0.1);
+      margin-bottom: 24px;
+    }
+
+    .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+
+    .pricing-features li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 0.85rem;
+      color: var(--light-grey);
+      line-height: 1.5;
+    }
+
+    .pricing-features li::before {
+      content: '✓';
+      color: var(--teal);
+      font-family: var(--mono);
+      font-weight: 700;
+      font-size: 0.75rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .pricing-features li.muted { color: rgba(136,144,164,0.4); }
+    .pricing-features li.muted::before { color: rgba(136,144,164,0.25); }
+
+    .btn-pricing-primary {
+      display: block; width: 100%; text-align: center;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--dark-bg);
+      background: linear-gradient(135deg, var(--teal), var(--blue));
+      padding: 14px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.2s;
+      box-shadow: 0 4px 24px rgba(0,196,212,0.3);
+    }
+
+    .btn-pricing-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    .btn-pricing-ghost {
+      display: block; width: 100%; text-align: center;
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: transparent;
+      padding: 13px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      border: 1px solid rgba(17,166,201,0.25);
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .btn-pricing-ghost:hover {
+      border-color: var(--teal);
+      background: rgba(0,196,212,0.06);
+    }
+
+    /* ─── FAQ ────────────────────────────────────────────────── */
+    .faq-section { position: relative; z-index: 1; padding: 100px 0; }
+
+    .faq-inner {
+      max-width: 780px; margin: 0 auto; padding: 0 6vw;
+    }
+
+    .faq-header { text-align: center; margin-bottom: 56px; }
+
+    .faq-list { display: flex; flex-direction: column; gap: 12px; }
+
+    .faq-item {
+      background: rgba(13,21,37,0.7);
+      border: 1px solid rgba(17,166,201,0.1);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+
+    .faq-item:hover { border-color: rgba(0,196,212,0.25); }
+
+    .faq-item.open { border-color: rgba(0,196,212,0.3); }
+
+    .faq-question {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 22px 28px;
+      cursor: pointer;
+      font-family: var(--mono);
+      font-size: 0.88rem;
+      font-weight: 500;
+      color: var(--white);
+      letter-spacing: 0.02em;
+      user-select: none;
+    }
+
+    .faq-icon {
+      width: 20px; height: 20px;
+      border: 1px solid rgba(0,196,212,0.3);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.75rem;
+      color: var(--teal);
+      transition: transform 0.25s, background 0.2s;
+    }
+
+    .faq-item.open .faq-icon { transform: rotate(45deg); background: rgba(0,196,212,0.12); }
+
+    .faq-answer {
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.35s ease, padding 0.25s ease;
+    }
+
+    .faq-answer-inner {
+      padding: 0 28px 22px;
+      font-size: 0.9rem;
+      color: var(--light-grey);
+      line-height: 1.8;
+    }
+
+    .faq-item.open .faq-answer { max-height: 300px; }
+
+    /* ─── CTA EMAIL ──────────────────────────────────────────── */
+    .cta-form {
+      display: flex; gap: 12px; max-width: 460px; margin: 0 auto 24px;
+      flex-wrap: wrap; justify-content: center;
+    }
+
+    .cta-input {
+      flex: 1; min-width: 220px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(0,196,212,0.25);
+      border-radius: 6px;
+      padding: 14px 18px;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      color: var(--white);
+      outline: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .cta-input::placeholder { color: rgba(136,144,164,0.6); }
+    .cta-input:focus { border-color: var(--teal); background: rgba(0,196,212,0.06); }
+
     /* ─── RESPONSIVE ─────────────────────────────────────── */
     @media (max-width: 900px) {
       .nav-links { display: none; }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; }
 
       .about-grid { grid-template-columns: 1fr; gap: 48px; }
 
@@ -1100,7 +1432,7 @@
 <section class="hero">
   <p class="hero-eyebrow">// Welcome to the future of automation</p>
   <img src="brand_assets/Crew Automate.jpeg" alt="Crew Automate" class="hero-logo" />
-  <h1>Automate Together.<br /><span class="accent">Scale Faster.</span></h1>
+  <h1>Automate Together.<br /><span class="gradient-text">Scale Faster.</span></h1>
   <p class="hero-sub">
     Crew Automate is the community where automation builders, AI engineers, and operators share workflows, tools, and strategies to build smarter systems — together.
   </p>
@@ -1108,6 +1440,21 @@
     <a href="join.html" class="btn-primary">Join the Community</a>
     <a href="#about" class="btn-secondary">Learn More</a>
   </div>
+  <div class="hero-trust">
+    <div class="trust-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      2,000+ Members
+    </div>
+    <div class="trust-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+      500+ Workflows Shared
+    </div>
+    <div class="trust-item">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      Free Forever
+    </div>
+  </div>
+
   <div class="hero-scroll">
     <div class="scroll-line"></div>
     <span>Scroll</span>
@@ -1131,6 +1478,45 @@
   <div class="stat-item">
     <div class="stat-number" data-target="100" data-suffix="%">0</div>
     <div class="stat-label">Free to Join</div>
+  </div>
+</div>
+
+<!-- ─── TOOL MARQUEE ──────────────────────────────────────────── -->
+<div class="marquee-section">
+  <div class="marquee-label">Built with</div>
+  <div class="marquee-label-right"></div>
+  <div class="marquee-track">
+    <span class="marquee-item"><span class="marquee-dot"></span>Make.com</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>n8n</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Zapier</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>OpenAI</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Claude</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Airtable</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Notion</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Python</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Slack</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Pipedream</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Google Sheets</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>HubSpot</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>ActiveCampaign</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Supabase</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Webflow</span>
+    <!-- duplicate for seamless loop -->
+    <span class="marquee-item"><span class="marquee-dot"></span>Make.com</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>n8n</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Zapier</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>OpenAI</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Claude</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Airtable</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Notion</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Python</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Slack</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Pipedream</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Google Sheets</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>HubSpot</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>ActiveCampaign</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Supabase</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Webflow</span>
   </div>
 </div>
 
@@ -1336,6 +1722,150 @@
   </div>
 </section>
 
+<!-- ─── PRICING ───────────────────────────────────────────────── -->
+<section class="pricing-section" id="pricing">
+  <div class="pricing-inner">
+    <div class="pricing-header reveal">
+      <div class="section-tag">// Pricing</div>
+      <h2 class="section-title">Simple, transparent <span class="accent">pricing.</span></h2>
+      <p class="section-sub">Start free. Upgrade when you're ready to go deeper.</p>
+    </div>
+    <div class="pricing-grid">
+
+      <!-- FREE -->
+      <div class="pricing-card reveal">
+        <div class="pricing-tier">Community</div>
+        <div class="pricing-price">
+          <span class="price-num">$0</span>
+          <span class="price-per">/ forever</span>
+        </div>
+        <p class="pricing-desc">Everything you need to get started with automation — no credit card required.</p>
+        <hr class="pricing-divider" />
+        <ul class="pricing-features">
+          <li>Full community access</li>
+          <li>Browse 500+ workflow templates</li>
+          <li>AI agent blueprints (WAT framework)</li>
+          <li>Weekly live sessions</li>
+          <li>Tool directory access</li>
+          <li class="muted">Private mastermind group</li>
+          <li class="muted">1-on-1 workflow reviews</li>
+          <li class="muted">Early access drops</li>
+        </ul>
+        <a href="join.html" class="btn-pricing-ghost">Join Free</a>
+      </div>
+
+      <!-- PRO -->
+      <div class="pricing-card featured reveal">
+        <div class="pricing-badge">Most Popular</div>
+        <div class="pricing-tier">Pro Member</div>
+        <div class="pricing-price">
+          <span class="price-num">$49</span>
+          <span class="price-per">/ month</span>
+        </div>
+        <p class="pricing-desc">For serious builders who want to move faster with direct support and premium resources.</p>
+        <hr class="pricing-divider" />
+        <ul class="pricing-features">
+          <li>Everything in Community</li>
+          <li>Private mastermind group</li>
+          <li>Monthly 1-on-1 workflow review</li>
+          <li>Early access to new tools & drops</li>
+          <li>Premium template library</li>
+          <li>Priority Q&amp;A in AMAs</li>
+          <li>Member-only resource vault</li>
+          <li>Slack async support channel</li>
+        </ul>
+        <a href="join.html" class="btn-pricing-primary">Get Pro Access</a>
+      </div>
+
+      <!-- AGENCY -->
+      <div class="pricing-card reveal">
+        <div class="pricing-tier">Agency / Team</div>
+        <div class="pricing-price">
+          <span class="price-num">$199</span>
+          <span class="price-per">/ month</span>
+        </div>
+        <p class="pricing-desc">For teams scaling automation across clients. Includes seats for your whole crew.</p>
+        <hr class="pricing-divider" />
+        <ul class="pricing-features">
+          <li>Everything in Pro</li>
+          <li>Up to 5 team seats</li>
+          <li>Agency-specific workflow library</li>
+          <li>Client delivery templates</li>
+          <li>Dedicated Slack channel</li>
+          <li>Monthly team strategy call</li>
+          <li>White-label resource kit</li>
+          <li>Custom onboarding session</li>
+        </ul>
+        <a href="join.html" class="btn-pricing-ghost">Contact Us</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── FAQ ───────────────────────────────────────────────────── -->
+<section class="faq-section" id="faq">
+  <div class="faq-inner">
+    <div class="faq-header reveal">
+      <div class="section-tag">// FAQ</div>
+      <h2 class="section-title">Common <span class="accent">questions.</span></h2>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item reveal">
+        <div class="faq-question">
+          Do I need to know how to code to join?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Not at all. Crew Automate welcomes builders at every level — from no-coders using Make and Zapier to engineers writing custom Python scripts. The community has resources for everyone, and members are happy to help regardless of where you're starting from.</div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-question">
+          What tools does the community focus on?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">We cover the full stack — Make.com, n8n, Zapier, OpenAI, Claude, Airtable, Notion, Python, Google Sheets, HubSpot, and more. If it can be automated, someone in the community has probably built it and is happy to share.</div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-question">
+          What is the WAT framework?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">WAT stands for Workflows, Agents, Tools — a structured framework for building reliable AI-powered automation systems. Workflows define what to do, Agents handle intelligent decision-making, and Tools execute the work. It's the backbone of how Crew Automate members build and share systems.</div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-question">
+          Can I cancel my Pro membership anytime?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Yes. Pro and Agency memberships are month-to-month with no long-term commitment. Cancel anytime and you'll retain access until the end of your billing period. No questions asked.</div>
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-question">
+          How active is the community?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-answer">
+          <div class="faq-answer-inner">Very. Members post daily, questions typically get answered within hours, and we host live sessions and AMAs regularly. The community is built for practitioners — people who are actively building — so the signal-to-noise ratio is high.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- ─── CTA ───────────────────────────────────────────────── -->
 <section class="cta-section" id="join">
   <div class="cta-inner">
@@ -1343,9 +1873,12 @@
       <div class="section-tag">// Ready to Join?</div>
       <h2>Start automating<br /><span class="accent">with your crew.</span></h2>
       <p>Free to join. No fluff. Just serious builders doing serious things with automation.</p>
+      <form class="cta-form" onsubmit="return false;">
+        <input type="email" class="cta-input" placeholder="Enter your email..." />
+        <a href="join.html" class="btn-primary" style="white-space:nowrap;">Join Free →</a>
+      </form>
       <div class="cta-actions">
-        <a href="join.html" class="btn-primary">Join Crew Automate — Free</a>
-        <a href="#features" class="btn-secondary">View Resources First</a>
+        <a href="#pricing" class="btn-secondary">View Pricing</a>
       </div>
     </div>
   </div>
@@ -1500,6 +2033,15 @@
     });
   }, { threshold: 0.5 });
   document.querySelectorAll('.stat-number[data-target]').forEach(el => countObserver.observe(el));
+
+  /* ─── FAQ ACCORDION ─────────────────────────────────────── */
+  document.querySelectorAll('.faq-item').forEach(item => {
+    item.querySelector('.faq-question').addEventListener('click', () => {
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
 </script>
 </body>
 </html>
