@@ -15,6 +15,14 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Check secrets are set
+        run: |
+          if [ -z "$TOKEN" ]; then echo "❌ CLOUDFLARE_API_TOKEN is empty or missing"; exit 1; else echo "✅ CLOUDFLARE_API_TOKEN is set (length: ${#TOKEN})"; fi
+          if [ -z "$ACCOUNT" ]; then echo "❌ CLOUDFLARE_ACCOUNT_ID is empty or missing"; exit 1; else echo "✅ CLOUDFLARE_ACCOUNT_ID is set"; fi
+        env:
+          TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          ACCOUNT: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+
       - name: Install Wrangler
         run: npm install -g wrangler
 
