@@ -44,28 +44,20 @@
     nav {
       position: fixed; top:0; left:0; right:0; z-index:100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 30px 56px;
-      transition: background .5s, backdrop-filter .5s, padding .4s, border-color .5s;
-      border-bottom: 1px solid transparent;
-    }
-    nav.scrolled {
-      background: rgba(8,8,7,.92);
-      backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-      padding-top: 18px; padding-bottom: 18px;
-      border-bottom-color: var(--gold-dim);
+      padding: 24px 56px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--rule);
     }
     .nav-wordmark {
       font-weight: 800; font-size: 12px; letter-spacing: .28em;
       text-transform: uppercase; color: #F0EDE8; text-decoration: none;
-      text-shadow: 0 1px 4px rgba(0,0,0,.95), 0 2px 20px rgba(0,0,0,.8), 0 0 40px rgba(0,0,0,.6);
     }
     .nav-links { display:flex; gap:48px; list-style:none; }
     .nav-links a {
       font-size: 10px; font-weight: 500; letter-spacing: .22em;
-      text-transform: uppercase; color: rgba(240,237,232,.85);
+      text-transform: uppercase; color: rgba(240,237,232,.6);
       text-decoration: none; position: relative;
       transition: color .3s;
-      text-shadow: 0 1px 4px rgba(0,0,0,.9), 0 2px 16px rgba(0,0,0,.7);
     }
     .nav-links a::after {
       content:''; position:absolute; left:0; bottom:-3px;
@@ -75,92 +67,59 @@
     .nav-links a:hover { color:var(--text); }
     .nav-links a:hover::after { width:100%; }
 
-    /* ── HERO ── */
-    .hero { position:relative; width:100vw; height:100vh; overflow:hidden; }
-    .hero video {
-      position:absolute; inset:0; width:100%; height:100%;
-      object-fit:cover; object-position:center;
+    /* ── HERO VIDEO SHOWCASE ── */
+    .hero {
+      padding-top: 88px; /* clear fixed nav */
+      background: var(--bg);
     }
-    /* Subtle dark film so text pops without killing the video */
-    .hero-scrim {
-      position:absolute; inset:0;
-      background: rgba(8,8,7,.28);
-      z-index:1; pointer-events:none;
-    }
-    .hero-fade {
-      position:absolute; bottom:0; left:0; right:0; height:50%;
-      background:linear-gradient(to bottom,transparent,var(--bg));
-      z-index:2; pointer-events:none;
-    }
-    /* Top vignette so nav text stays readable over any video frame */
-    .hero-top-fade {
-      position:absolute; top:0; left:0; right:0; height:220px;
-      background:linear-gradient(to bottom,rgba(8,8,7,.65) 0%,transparent 100%);
-      z-index:2; pointer-events:none;
-    }
-    /* Centered hero content */
-    .hero-content {
-      position:absolute; inset:0;
-      z-index:3;
-      display:flex; flex-direction:column;
-      align-items:center; justify-content:center;
-      text-align:center;
-      padding: 0 24px;
-    }
-    .hero-eyebrow {
-      font-size: 9px; font-weight: 600; letter-spacing: .42em;
-      text-transform: uppercase; color: var(--gold);
+    .hero-label {
       display: flex; align-items: center; gap: 14px;
-      margin-bottom: 28px;
-      opacity: 0;
-      animation: fadeUp .9s cubic-bezier(.25,1,.5,1) .3s forwards;
+      padding: 0 56px;
+      margin-bottom: 20px;
+      font-size: 9px; font-weight: 600; letter-spacing: .36em;
+      text-transform: uppercase; color: var(--gold);
     }
-    .hero-eyebrow::before, .hero-eyebrow::after {
-      content:''; width:28px; height:1px;
+    .hero-label::before {
+      content:''; width:20px; height:1px;
       background:var(--gold); opacity:.5; flex-shrink:0;
     }
-    .hero-headline {
+    .hero-video-wrap {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #000;
+      overflow: hidden;
+    }
+    .hero-video-wrap video {
+      width: 100%; height: 100%;
+      display: block;
+      object-fit: contain;
+    }
+    .hero-caption {
+      padding: 20px 56px 0;
+      display: flex; align-items: baseline;
+      justify-content: space-between; gap: 24px;
+    }
+    .hero-caption-title {
       font-family: 'Cormorant Garamond', serif;
       font-weight: 300; font-style: italic;
-      font-size: clamp(48px, 7vw, 96px);
-      line-height: 1.0; letter-spacing: -.02em;
-      color: var(--text);
-      max-width: 900px;
-      opacity: 0;
-      animation: fadeUp 1s cubic-bezier(.25,1,.5,1) .5s forwards;
+      font-size: clamp(28px, 3.5vw, 48px);
+      letter-spacing: -.02em; color: var(--text);
+      line-height: 1.1;
     }
-    .hero-headline span { color: var(--stone); }
-    .hero-sub {
-      margin-top: 24px;
-      font-size: 11px; letter-spacing: .18em; text-transform: uppercase;
-      color: rgba(240,237,232,.55);
-      opacity: 0;
-      animation: fadeUp .9s cubic-bezier(.25,1,.5,1) .75s forwards;
+    .hero-caption-title span { color: var(--stone); }
+    .hero-caption-meta {
+      font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+      color: var(--muted); white-space: nowrap; flex-shrink: 0;
     }
-    /* Scroll indicator */
-    .hero-scroll {
-      position:absolute; bottom: 40px; left:50%; transform:translateX(-50%);
-      z-index:3;
-      display:flex; flex-direction:column; align-items:center; gap:8px;
-      opacity: 0;
-      animation: fadeUp .8s cubic-bezier(.25,1,.5,1) 1.1s forwards;
+
+    @media (max-width: 768px) {
+      .hero { padding-top: 72px; }
+      .hero-label { padding: 0 24px; margin-bottom: 14px; }
+      .hero-caption { padding: 14px 24px 0; flex-direction: column; gap: 6px; }
     }
-    .hero-scroll-label {
-      font-size: 8px; letter-spacing: .32em; text-transform: uppercase;
-      color: rgba(240,237,232,.35);
-    }
-    .hero-scroll-line {
-      width: 1px; height: 48px;
-      background: linear-gradient(to bottom, rgba(168,135,74,.6), transparent);
-      animation: scrollPulse 2s ease-in-out 1.5s infinite;
-    }
-    @keyframes fadeUp {
-      from { opacity:0; transform:translateY(18px); }
-      to   { opacity:1; transform:translateY(0); }
-    }
-    @keyframes scrollPulse {
-      0%, 100% { opacity:.4; transform:scaleY(1); }
-      50%       { opacity:1; transform:scaleY(1.15); }
+    @media (max-width: 480px) {
+      .hero-label { padding: 0 18px; }
+      .hero-caption { padding: 12px 18px 0; }
     }
 
     /* ── SHARED ── */
@@ -435,22 +394,15 @@
 
   <!-- HERO -->
   <section class="hero">
-    <video autoplay muted loop playsinline preload="auto">
-      <source src="Highrise.mp4" type="video/mp4">
-    </video>
-    <div class="hero-scrim"></div>
-    <div class="hero-top-fade"></div>
-    <div class="hero-fade"></div>
-
-    <div class="hero-content">
-      <p class="hero-eyebrow">Commercial Architecture</p>
-      <h1 class="hero-headline">Buildings that define<br><span>a city's silhouette.</span></h1>
-      <p class="hero-sub">Crew Automate — Est. 2018</p>
+    <p class="hero-label">Featured Work</p>
+    <div class="hero-video-wrap">
+      <video autoplay muted loop playsinline preload="auto">
+        <source src="Highrise.mp4" type="video/mp4">
+      </video>
     </div>
-
-    <div class="hero-scroll">
-      <span class="hero-scroll-label">Scroll</span>
-      <div class="hero-scroll-line"></div>
+    <div class="hero-caption">
+      <h1 class="hero-caption-title">Buildings that define<br><span>a city's silhouette.</span></h1>
+      <span class="hero-caption-meta">Highrise — 2025</span>
     </div>
   </section>
 
@@ -583,19 +535,6 @@
     </div>
   </footer>
 
-  <script>
-    const nav = document.getElementById('nav');
-    let ticking = false;
-    window.addEventListener('scroll', () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          nav.classList.toggle('scrolled', window.scrollY > 60);
-          ticking = false;
-        });
-        ticking = true;
-      }
-    });
-  </script>
 
 </body>
 </html>
