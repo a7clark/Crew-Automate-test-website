@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crew Automate — Logo</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300&family=Syne:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:    #080807;
+    --text:  #F0EDE8;
+    --gold:  #A8874A;
+    --stone: #8C7B68;
+    --muted: #3A3937;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Syne', sans-serif;
+  }
+
+  /* ─── LOGO COMPONENT ─── */
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 20px;
+    text-decoration: none;
+    user-select: none;
+  }
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    line-height: 1;
+  }
+  .logo-crew {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 26px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text, #F0EDE8);
+  }
+  .logo-automate {
+    font-family: 'Syne', sans-serif;
+    font-weight: 400;
+    font-size: 10px;
+    letter-spacing: 0.45em;
+    text-transform: uppercase;
+    color: var(--stone, #8C7B68);
+  }
+
+  /* ─── Mark animations ─── */
+  .mark-outer { transform-origin: 24px 24px; animation: spin-cw 22s linear infinite; }
+  .mark-inner { transform-origin: 24px 24px; animation: spin-ccw 14s linear infinite; }
+  @keyframes spin-cw  { to { transform: rotate(360deg); } }
+  @keyframes spin-ccw { to { transform: rotate(-360deg); } }
+
+  /* ─── LAYOUT ─── */
+  .slab {
+    padding: 72px 80px;
+  }
+  .slab--dark  { background: var(--bg); }
+  .slab--mid   { background: #111110; }
+  .slab--light { background: #F5F2ED; }
+
+  .slab-label {
+    font-size: 9px;
+    letter-spacing: 0.32em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 40px;
+  }
+  .slab--light .slab-label { color: #b0a090; }
+
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(168,135,74,.2) 30%, rgba(168,135,74,.2) 70%, transparent);
+    margin: 48px 0;
+  }
+  .slab--light .divider {
+    background: linear-gradient(to right, transparent, rgba(139,106,53,.2) 30%, rgba(139,106,53,.2) 70%, transparent);
+  }
+
+  /* Hero primary lockup */
+  .hero-lockup {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    margin-bottom: 8px;
+  }
+  .hero-lockup .logo-crew    { font-size: 40px; letter-spacing: 0.22em; }
+  .hero-lockup .logo-automate { font-size: 13px; letter-spacing: 0.5em; }
+  .hero-lockup .logo-text    { gap: 6px; }
+
+  /* Size row */
+  .size-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 52px;
+    flex-wrap: wrap;
+  }
+
+  /* sm / default / lg convenience classes */
+  .logo--sm .logo-crew     { font-size: 17px; letter-spacing: 0.18em; }
+  .logo--sm .logo-automate { font-size: 8px; letter-spacing: 0.4em; }
+  .logo--sm                { gap: 13px; }
+
+  .logo--md .logo-crew     { font-size: 24px; }
+  .logo--md .logo-automate { font-size: 10px; }
+  .logo--md                { gap: 18px; }
+
+  /* Gold mono */
+  .logo--gold .logo-crew     { color: var(--gold, #A8874A); }
+  .logo--gold .logo-automate { color: var(--gold, #A8874A); opacity: 0.55; }
+
+  /* Light theme overrides */
+  .on-light .logo-crew     { color: #1A1917; }
+  .on-light .logo-automate { color: #6B5C4E; }
+
+  /* Stacked */
+  .logo--stacked {
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .logo--stacked .logo-text { align-items: center; gap: 5px; }
+
+  /* Variants row */
+  .variant-row {
+    display: flex;
+    align-items: center;
+    gap: 72px;
+    flex-wrap: wrap;
+  }
+
+  /* Mark-only grid */
+  .mark-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 36px;
+    flex-wrap: wrap;
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══ DARK — PRIMARY HERO ═══ -->
+<div class="slab slab--dark">
+  <div class="slab-label">Primary — Dark</div>
+
+  <!-- Hero size -->
+  <div class="hero-lockup">
+    <svg width="72" height="72" viewBox="0 0 48 48" fill="none">
+      <g class="mark-outer">
+        <rect x="5" y="5" width="38" height="38" rx="1"
+              stroke="#A8874A" stroke-width="0.9" fill="none"
+              stroke-dasharray="7 3.5 1.5 3.5"/>
+      </g>
+      <g class="mark-inner">
+        <rect x="13" y="13" width="22" height="22" rx="0.4"
+              stroke="#F0EDE8" stroke-width="0.75" fill="none"/>
+      </g>
+      <line x1="24" y1="17.5" x2="24" y2="30.5" stroke="#A8874A" stroke-width="0.65" opacity="0.75"/>
+      <line x1="17.5" y1="24" x2="30.5" y2="24" stroke="#A8874A" stroke-width="0.65" opacity="0.75"/>
+      <circle cx="24" cy="24" r="1.8" fill="#A8874A"/>
+      <!-- corner brackets -->
+      <polyline points="5,10 5,5 10,5"   stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+      <polyline points="38,5 43,5 43,10" stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+      <polyline points="43,38 43,43 38,43" stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+      <polyline points="10,43 5,43 5,38"  stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+    </svg>
+    <div class="logo-text">
+      <span class="logo-crew">Crew</span>
+      <span class="logo-automate">Automate</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Size variants -->
+  <div class="size-row">
+    <!-- SM -->
+    <a class="logo logo--sm" href="#">
+      <svg width="30" height="30" viewBox="0 0 48 48" fill="none">
+        <g class="mark-outer">
+          <rect x="5" y="5" width="38" height="38" rx="1" stroke="#A8874A" stroke-width="0.9" fill="none" stroke-dasharray="7 3.5 1.5 3.5"/>
+        </g>
+        <g class="mark-inner">
+          <rect x="13" y="13" width="22" height="22" rx="0.4" stroke="#F0EDE8" stroke-width="0.75" fill="none"/>
+        </g>
+        <line x1="24" y1="17.5" x2="24" y2="30.5" stroke="#A8874A" stroke-width="0.65" opacity="0.75"/>
+        <line x1="17.5" y1="24" x2="30.5" y2="24" stroke="#A8874A" stroke-width="0.65" opacity="0.75"/>
+        <circle cx="24" cy="24" r="1.8" fill="#A8874A"/>
+        <polyline points="5,10 5,5 10,5"   stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+        <polyline points="38,5 43,5 43,10" stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+        <polyline points="43,38 43,43 38,43" stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+        <polyline points="10,43 5,43 5,38"  stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+      </svg>
+      <div class="logo-text">
+        <span class="logo-crew">Crew</span>
+        <span class="logo-automate">Automate</span>
+      </div>
+    </a>
+
+    <!-- MD -->
+    <a class="logo logo--md" href="#">
+      <svg width="44" height="44" viewBox="0 0 48 48" fill="none">
+        <g class="mark-outer">
+          <rect x="5" y="5" width="38" height="38" rx="1" stroke="#A8874A" stroke-width="0.9" fill="none" stroke-dasharray="7 3.5 1.5 3.5"/>
+        </g>
+        <g class="mark-inner">
+          <rect x="13" y="13" width="22" height="22" rx="0.4" stroke="#F0EDE8" stroke-width="0.75" fill="none"/>
+        </g>
+        <line x1="24" y1="17.5" x2="24" y2="30.5" stroke="#A8874A" stroke-width="0.65" opacity="0.75"/>
+        <line x1="17.5" y1="24" x2="30.5" y2="24" stroke="#A8874A" stroke-width="0.65" opacity="0.75"/>
+        <circle cx="24" cy="24" r="1.8" fill="#A8874A"/>
+        <polyline points="5,10 5,5 10,5"   stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+        <polyline points="38,5 43,5 43,10" stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+        <polyline points="43,38 43,43 38,43" stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+        <polyline points="10,43 5,43 5,38"  stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+      </svg>
+      <div class="logo-text">
+        <span class="logo-crew">Crew</span>
+        <span class="logo-automate">Automate</span>
+      </div>
+    </a>
+
+    <!-- Mark only — three sizes -->
+    <div class="mark-row" style="margin-left: auto;">
+      <svg width="24" height="24" viewBox="0 0 48 48" fill="none" style="opacity:.85">
+        <g class="mark-outer"><rect x="5" y="5" width="38" height="38" rx="1" stroke="#A8874A" stroke-width="0.9" fill="none" stroke-dasharray="7 3.5 1.5 3.5"/></g>
+        <g class="mark-inner"><rect x="13" y="13" width="22" height="22" rx="0.4" stroke="#F0EDE8" stroke-width="0.75" fill="none"/></g>
+        <circle cx="24" cy="24" r="1.8" fill="#A8874A"/>
+        <polyline points="5,10 5,5 10,5"     stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+        <polyline points="38,5 43,5 43,10"   stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+        <polyline points="43,38 43,43 38,43" stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+        <polyline points="10,43 5,43 5,38"   stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+      </svg>
+      <svg width="40" height="40" viewBox="0 0 48 48" fill="none" style="opacity:.85">
+        <g class="mark-outer"><rect x="5" y="5" width="38" height="38" rx="1" stroke="#A8874A" stroke-width="0.9" fill="none" stroke-dasharray="7 3.5 1.5 3.5"/></g>
+        <g class="mark-inner"><rect x="13" y="13" width="22" height="22" rx="0.4" stroke="#F0EDE8" stroke-width="0.75" fill="none"/></g>
+        <line x1="24" y1="17.5" x2="24" y2="30.5" stroke="#A8874A" stroke-width="0.65" opacity="0.75"/>
+        <line x1="17.5" y1="24" x2="30.5" y2="24" stroke="#A8874A" stroke-width="0.65" opacity="0.75"/>
+        <circle cx="24" cy="24" r="1.8" fill="#A8874A"/>
+        <polyline points="5,10 5,5 10,5"     stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+        <polyline points="38,5 43,5 43,10"   stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+        <polyline points="43,38 43,43 38,43" stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+        <polyline points="10,43 5,43 5,38"   stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+      </svg>
+      <svg width="64" height="64" viewBox="0 0 48 48" fill="none" style="opacity:.85">
+        <g class="mark-outer"><rect x="5" y="5" width="38" height="38" rx="1" stroke="#A8874A" stroke-width="0.9" fill="none" stroke-dasharray="7 3.5 1.5 3.5"/></g>
+        <g class="mark-inner"><rect x="13" y="13" width="22" height="22" rx="0.4" stroke="#F0EDE8" stroke-width="0.75" fill="none"/></g>
+        <line x1="24" y1="17.5" x2="24" y2="30.5" stroke="#A8874A" stroke-width="0.65" opacity="0.75"/>
+        <line x1="17.5" y1="24" x2="30.5" y2="24" stroke="#A8874A" stroke-width="0.65" opacity="0.75"/>
+        <circle cx="24" cy="24" r="1.8" fill="#A8874A"/>
+        <polyline points="5,10 5,5 10,5"     stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+        <polyline points="38,5 43,5 43,10"   stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+        <polyline points="43,38 43,43 38,43" stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+        <polyline points="10,43 5,43 5,38"   stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- Variant row: gold + stacked -->
+  <div class="variant-row">
+    <a class="logo logo--md logo--gold" href="#">
+      <svg width="44" height="44" viewBox="0 0 48 48" fill="none">
+        <g class="mark-outer"><rect x="5" y="5" width="38" height="38" rx="1" stroke="#A8874A" stroke-width="0.9" fill="none" stroke-dasharray="7 3.5 1.5 3.5"/></g>
+        <g class="mark-inner"><rect x="13" y="13" width="22" height="22" rx="0.4" stroke="#A8874A" stroke-width="0.75" fill="none" opacity="0.6"/></g>
+        <line x1="24" y1="17.5" x2="24" y2="30.5" stroke="#A8874A" stroke-width="0.65" opacity="0.45"/>
+        <line x1="17.5" y1="24" x2="30.5" y2="24" stroke="#A8874A" stroke-width="0.65" opacity="0.45"/>
+        <circle cx="24" cy="24" r="1.8" fill="#A8874A"/>
+        <polyline points="5,10 5,5 10,5"     stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+        <polyline points="38,5 43,5 43,10"   stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+        <polyline points="43,38 43,43 38,43" stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+        <polyline points="10,43 5,43 5,38"   stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+      </svg>
+      <div class="logo-text">
+        <span class="logo-crew">Crew</span>
+        <span class="logo-automate">Automate</span>
+      </div>
+    </a>
+
+    <a class="logo logo--stacked" href="#" style="text-align:center">
+      <svg width="52" height="52" viewBox="0 0 48 48" fill="none">
+        <g class="mark-outer"><rect x="5" y="5" width="38" height="38" rx="1" stroke="#A8874A" stroke-width="0.9" fill="none" stroke-dasharray="7 3.5 1.5 3.5"/></g>
+        <g class="mark-inner"><rect x="13" y="13" width="22" height="22" rx="0.4" stroke="#F0EDE8" stroke-width="0.75" fill="none"/></g>
+        <line x1="24" y1="17.5" x2="24" y2="30.5" stroke="#A8874A" stroke-width="0.65" opacity="0.75"/>
+        <line x1="17.5" y1="24" x2="30.5" y2="24" stroke="#A8874A" stroke-width="0.65" opacity="0.75"/>
+        <circle cx="24" cy="24" r="1.8" fill="#A8874A"/>
+        <polyline points="5,10 5,5 10,5"     stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+        <polyline points="38,5 43,5 43,10"   stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+        <polyline points="43,38 43,43 38,43" stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+        <polyline points="10,43 5,43 5,38"   stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+      </svg>
+      <div class="logo-text">
+        <span class="logo-crew" style="font-size:22px;letter-spacing:.22em;">Crew</span>
+        <span class="logo-automate" style="letter-spacing:.5em;">Automate</span>
+      </div>
+    </a>
+  </div>
+</div>
+
+<!-- ═══ LIGHT ═══ -->
+<div class="slab slab--light">
+  <div class="slab-label">Primary — Light</div>
+
+  <div class="hero-lockup">
+    <svg width="72" height="72" viewBox="0 0 48 48" fill="none">
+      <g class="mark-outer">
+        <rect x="5" y="5" width="38" height="38" rx="1" stroke="#8B6A35" stroke-width="0.9" fill="none" stroke-dasharray="7 3.5 1.5 3.5"/>
+      </g>
+      <g class="mark-inner">
+        <rect x="13" y="13" width="22" height="22" rx="0.4" stroke="#1A1917" stroke-width="0.75" fill="none"/>
+      </g>
+      <line x1="24" y1="17.5" x2="24" y2="30.5" stroke="#8B6A35" stroke-width="0.65" opacity="0.75"/>
+      <line x1="17.5" y1="24" x2="30.5" y2="24" stroke="#8B6A35" stroke-width="0.65" opacity="0.75"/>
+      <circle cx="24" cy="24" r="1.8" fill="#8B6A35"/>
+      <polyline points="5,10 5,5 10,5"     stroke="#8B6A35" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+      <polyline points="38,5 43,5 43,10"   stroke="#8B6A35" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+      <polyline points="43,38 43,43 38,43" stroke="#8B6A35" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+      <polyline points="10,43 5,43 5,38"   stroke="#8B6A35" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+    </svg>
+    <div class="logo-text on-light">
+      <span class="logo-crew">Crew</span>
+      <span class="logo-automate">Automate</span>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <div class="variant-row">
+    <a class="logo logo--md on-light" href="#">
+      <svg width="44" height="44" viewBox="0 0 48 48" fill="none">
+        <g class="mark-outer"><rect x="5" y="5" width="38" height="38" rx="1" stroke="#8B6A35" stroke-width="0.9" fill="none" stroke-dasharray="7 3.5 1.5 3.5"/></g>
+        <g class="mark-inner"><rect x="13" y="13" width="22" height="22" rx="0.4" stroke="#1A1917" stroke-width="0.75" fill="none"/></g>
+        <line x1="24" y1="17.5" x2="24" y2="30.5" stroke="#8B6A35" stroke-width="0.65" opacity="0.75"/>
+        <line x1="17.5" y1="24" x2="30.5" y2="24" stroke="#8B6A35" stroke-width="0.65" opacity="0.75"/>
+        <circle cx="24" cy="24" r="1.8" fill="#8B6A35"/>
+        <polyline points="5,10 5,5 10,5"     stroke="#8B6A35" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+        <polyline points="38,5 43,5 43,10"   stroke="#8B6A35" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+        <polyline points="43,38 43,43 38,43" stroke="#8B6A35" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+        <polyline points="10,43 5,43 5,38"   stroke="#8B6A35" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+      </svg>
+      <div class="logo-text on-light">
+        <span class="logo-crew">Crew</span>
+        <span class="logo-automate">Automate</span>
+      </div>
+    </a>
+
+    <!-- SM light -->
+    <a class="logo logo--sm on-light" href="#">
+      <svg width="30" height="30" viewBox="0 0 48 48" fill="none">
+        <g class="mark-outer"><rect x="5" y="5" width="38" height="38" rx="1" stroke="#8B6A35" stroke-width="0.9" fill="none" stroke-dasharray="7 3.5 1.5 3.5"/></g>
+        <g class="mark-inner"><rect x="13" y="13" width="22" height="22" rx="0.4" stroke="#1A1917" stroke-width="0.75" fill="none"/></g>
+        <circle cx="24" cy="24" r="1.8" fill="#8B6A35"/>
+        <polyline points="5,10 5,5 10,5"     stroke="#8B6A35" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+        <polyline points="38,5 43,5 43,10"   stroke="#8B6A35" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+        <polyline points="43,38 43,43 38,43" stroke="#8B6A35" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+        <polyline points="10,43 5,43 5,38"   stroke="#8B6A35" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+      </svg>
+      <div class="logo-text on-light">
+        <span class="logo-crew">Crew</span>
+        <span class="logo-automate">Automate</span>
+      </div>
+    </a>
+  </div>
+</div>
+
+</body>
+</html>

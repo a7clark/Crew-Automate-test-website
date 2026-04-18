@@ -59,9 +59,21 @@
       padding: 22px 64px;
     }
     .nav-wordmark {
-      font-weight: 800; font-size: 11px; letter-spacing: .32em;
-      text-transform: uppercase; color: var(--text); text-decoration: none;
+      display: inline-flex; align-items: center; gap: 11px;
+      text-decoration: none; user-select: none;
     }
+    .nav-wordmark .nw-crew {
+      font-weight: 800; font-size: 11px; letter-spacing: .32em;
+      text-transform: uppercase; color: var(--text);
+    }
+    .nav-wordmark .nw-auto {
+      font-size: 7px; font-weight: 400; letter-spacing: .38em;
+      text-transform: uppercase; color: var(--stone);
+    }
+    .nav-mark-outer { transform-origin: 12px 12px; animation: nm-cw 22s linear infinite; }
+    .nav-mark-inner { transform-origin: 12px 12px; animation: nm-ccw 14s linear infinite; }
+    @keyframes nm-cw  { to { transform: rotate(360deg); } }
+    @keyframes nm-ccw { to { transform: rotate(-360deg); } }
     .nav-links { display:flex; gap:52px; list-style:none; }
     .nav-links a {
       font-size: 9px; font-weight: 600; letter-spacing: .26em;
@@ -405,7 +417,30 @@
 
   <!-- NAV -->
   <nav id="nav">
-    <a href="#" class="nav-wordmark">Crew Automate</a>
+    <a href="#" class="nav-wordmark">
+      <svg width="24" height="24" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+        <g class="nav-mark-outer">
+          <rect x="5" y="5" width="38" height="38" rx="1"
+                stroke="#A8874A" stroke-width="0.9" fill="none"
+                stroke-dasharray="7 3.5 1.5 3.5"/>
+        </g>
+        <g class="nav-mark-inner">
+          <rect x="13" y="13" width="22" height="22" rx="0.4"
+                stroke="#F0EDE8" stroke-width="0.75" fill="none"/>
+        </g>
+        <line x1="24" y1="17.5" x2="24" y2="30.5" stroke="#A8874A" stroke-width="0.65" opacity="0.75"/>
+        <line x1="17.5" y1="24" x2="30.5" y2="24" stroke="#A8874A" stroke-width="0.65" opacity="0.75"/>
+        <circle cx="24" cy="24" r="1.8" fill="#A8874A"/>
+        <polyline points="5,10 5,5 10,5"     stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+        <polyline points="38,5 43,5 43,10"   stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+        <polyline points="43,38 43,43 38,43" stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+        <polyline points="10,43 5,43 5,38"   stroke="#A8874A" stroke-width="1.7" fill="none" stroke-linecap="square"/>
+      </svg>
+      <div style="display:flex;flex-direction:column;gap:2px;line-height:1;">
+        <span class="nw-crew">Crew</span>
+        <span class="nw-auto">Automate</span>
+      </div>
+    </a>
     <ul class="nav-links">
       <li><a href="#work">Work</a></li>
       <li><a href="#contact">Contact</a></li>
