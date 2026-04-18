@@ -36,9 +36,16 @@
     nav {
       position: fixed; top:0; left:0; right:0; z-index:100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 24px 56px;
-      background: var(--bg);
+      padding: 28px 56px;
+      background: transparent;
+      border-bottom: 1px solid transparent;
+      transition: background 0.5s ease, border-color 0.5s ease, backdrop-filter 0.5s ease;
+    }
+    nav.scrolled {
+      background: rgba(8,8,7,0.88);
       border-bottom: 1px solid var(--rule);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
     }
     .nav-wordmark {
       font-weight: 800; font-size: 12px; letter-spacing: .28em;
@@ -61,57 +68,24 @@
 
     /* ── HERO VIDEO SHOWCASE ── */
     .hero {
-      padding-top: 88px; /* clear fixed nav */
-      background: var(--bg);
-    }
-    .hero-label {
-      display: flex; align-items: center; gap: 14px;
-      padding: 0 56px;
-      margin-bottom: 20px;
-      font-size: 9px; font-weight: 600; letter-spacing: .36em;
-      text-transform: uppercase; color: var(--gold);
-    }
-    .hero-label::before {
-      content:''; width:20px; height:1px;
-      background:var(--gold); opacity:.5; flex-shrink:0;
-    }
-    .hero-video-wrap {
-      width: 100%;
-      aspect-ratio: 16/9;
-      background: #000;
+      position: relative;
+      width: 100vw;
+      height: 100vh;
       overflow: hidden;
+      background: #000;
     }
-    .hero-video-wrap video {
+    .hero video {
+      position: absolute; inset: 0;
       width: 100%; height: 100%;
-      display: block;
-      object-fit: contain;
+      object-fit: cover;
     }
-    .hero-caption {
-      padding: 20px 56px 0;
-      display: flex; align-items: baseline;
-      justify-content: space-between; gap: 24px;
-    }
-    .hero-caption-title {
-      font-family: 'Cormorant Garamond', serif;
-      font-weight: 300; font-style: italic;
-      font-size: clamp(28px, 3.5vw, 48px);
-      letter-spacing: -.02em; color: var(--text);
-      line-height: 1.1;
-    }
-    .hero-caption-title span { color: var(--stone); }
-    .hero-caption-meta {
-      font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
-      color: var(--muted); white-space: nowrap; flex-shrink: 0;
-    }
-
-    @media (max-width: 768px) {
-      .hero { padding-top: 72px; }
-      .hero-label { padding: 0 24px; margin-bottom: 14px; }
-      .hero-caption { padding: 14px 24px 0; flex-direction: column; gap: 6px; }
-    }
-    @media (max-width: 480px) {
-      .hero-label { padding: 0 18px; }
-      .hero-caption { padding: 12px 18px 0; }
+    /* subtle bottom vignette so content below reads clearly on scroll */
+    .hero::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 30%;
+      background: linear-gradient(to top, var(--bg), transparent);
+      pointer-events: none;
     }
 
     /* ── SHARED ── */
@@ -404,11 +378,7 @@
     @media (max-width: 768px) {
       .reel-grid { grid-template-columns: 1fr; }
       .wrap { padding: 0 28px; }
-      nav {
-        padding: 22px 28px;
-        background: rgba(8,8,7,.45);
-        backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-      }
+      nav { padding: 22px 28px; }
       .work { padding-top: 80px; }
       .project-row { grid-template-columns: 40px 1fr auto; }
       .project-year { display: none; }
@@ -442,16 +412,9 @@
 
   <!-- HERO -->
   <section class="hero">
-    <p class="hero-label">Featured Work</p>
-    <div class="hero-video-wrap">
-      <video autoplay muted loop playsinline preload="auto">
-        <source src="Highrise.mp4" type="video/mp4">
-      </video>
-    </div>
-    <div class="hero-caption">
-      <h1 class="hero-caption-title">Buildings that define<br><span>a city's silhouette.</span></h1>
-      <span class="hero-caption-meta">Highrise — 2025</span>
-    </div>
+    <video autoplay muted loop playsinline preload="auto">
+      <source src="Crew Automate.mp4" type="video/mp4">
+    </video>
   </section>
 
   <!-- SELECTED WORK -->
@@ -574,8 +537,8 @@
     <div class="wrap">
       <div class="studio-top">
         <p class="studio-statement">
-          Buildings that define a city's silhouette<br>
-          <span>for generations.</span>
+          Architecture built for<br>
+          developers who <span>can't afford to wait.</span>
         </p>
         <div style="flex-shrink:0; padding-top:6px;">
           <span class="section-label">Studio — Est. 2018</span>
@@ -585,11 +548,11 @@
       <div class="studio-grid">
         <div>
           <p class="studio-col-label">Practice</p>
-          <p class="studio-col-body">Crew Automate is a commercial architecture practice built around one conviction: that tall buildings should do more than stand. They should define a city's silhouette, anchor its districts, and earn their place in the skyline for generations.</p>
+          <p class="studio-col-body">Crew Automate is a commercial architecture practice built around one conviction: that execution is not separate from design — it is the discipline. We exist to deliver complex buildings on time, on budget, and without compromise to the quality that earns a developer's trust for the next project.</p>
         </div>
         <div>
           <p class="studio-col-label">Approach</p>
-          <p class="studio-col-body">We work across the full arc of every project — from early massing studies to the final coordinated construction set. Deliberate about scale, rigorous about structure, and uncompromising in the belief that great architecture is never accidental.</p>
+          <p class="studio-col-body">We embed into the full delivery arc — from early feasibility and massing to coordinated construction documents and permit. Tight timelines. No surprises. A team that is accountable at every stage, and experienced enough to see problems before they become delays.</p>
         </div>
         <div class="studio-blueprint">
           <p class="studio-col-label">Drawing</p>
@@ -617,13 +580,23 @@
       </div>
       <div class="footer-bottom">
         <span class="footer-copy">© 2026 Crew Automate. All rights reserved.</span>
-        <span class="footer-copy">Architecture for the vertical age.</span>
+        <span class="footer-copy">On time. On brief. Built to last.</span>
       </div>
     </div>
   </footer>
 
 
   <script>
+    // Nav: transparent over hero, opaque once scrolled past
+    const nav = document.getElementById('nav');
+    const threshold = window.innerHeight * 0.6;
+    function updateNav() {
+      nav.classList.toggle('scrolled', window.scrollY > threshold);
+    }
+    window.addEventListener('scroll', updateNav, { passive: true });
+    updateNav();
+
+    // Reel cards: hover to play/pause
     document.querySelectorAll('.reel-card').forEach(card => {
       const video = card.querySelector('video');
       card.addEventListener('mouseenter', () => video.play());
