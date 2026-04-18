@@ -508,17 +508,18 @@
     }, { passive: true });
 
     // Dark mode toggle (cosmetic — snaps back after 1.5s)
-    const themeToggle = document.getElementById('themeToggle');
-    let toggleTimeout = null;
-    themeToggle.addEventListener('click', () => {
-      if (toggleTimeout) return; // ignore clicks while animating
-      themeToggle.classList.add('toggled');
-      themeToggle.setAttribute('aria-pressed', 'false');
-      toggleTimeout = setTimeout(() => {
-        themeToggle.classList.remove('toggled');
-        themeToggle.setAttribute('aria-pressed', 'true');
-        toggleTimeout = null;
-      }, 1500);
+    document.addEventListener('DOMContentLoaded', () => {
+      const themeToggle = document.getElementById('themeToggle');
+      if (!themeToggle) return;
+      let toggleTimeout = null;
+      themeToggle.addEventListener('click', () => {
+        if (toggleTimeout) return; // ignore clicks while animating
+        themeToggle.classList.add('toggled');
+        toggleTimeout = setTimeout(() => {
+          themeToggle.classList.remove('toggled');
+          toggleTimeout = null;
+        }, 1500);
+      });
     });
   </script>
 
