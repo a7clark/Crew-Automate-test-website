@@ -59,19 +59,20 @@
       padding: 22px 64px;
     }
     .nav-wordmark {
-      display: inline-flex; align-items: center; gap: 11px;
+      display: inline-flex; align-items: center; gap: 14px;
       text-decoration: none; user-select: none;
     }
     .nav-wordmark .nw-crew {
-      font-weight: 800; font-size: 11px; letter-spacing: .32em;
+      font-weight: 800; font-size: 14px; letter-spacing: .32em;
       text-transform: uppercase; color: var(--text);
+      text-shadow: 0 1px 12px rgba(0,0,0,.6);
     }
     .nav-wordmark .nw-auto {
-      font-size: 7px; font-weight: 400; letter-spacing: .38em;
+      font-size: 8.5px; font-weight: 400; letter-spacing: .4em;
       text-transform: uppercase; color: var(--stone);
     }
-    .nav-mark-outer { transform-origin: 12px 12px; animation: nm-cw 22s linear infinite; }
-    .nav-mark-inner { transform-origin: 12px 12px; animation: nm-ccw 14s linear infinite; }
+    .nav-mark-outer { transform-origin: 24px 24px; animation: nm-cw 22s linear infinite; }
+    .nav-mark-inner { transform-origin: 24px 24px; animation: nm-ccw 14s linear infinite; }
     @keyframes nm-cw  { to { transform: rotate(360deg); } }
     @keyframes nm-ccw { to { transform: rotate(-360deg); } }
     .nav-links { display:flex; gap:52px; list-style:none; }
@@ -418,7 +419,7 @@
   <!-- NAV -->
   <nav id="nav">
     <a href="#" class="nav-wordmark">
-      <svg width="24" height="24" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+      <svg width="38" height="38" viewBox="0 0 48 48" fill="none" aria-hidden="true">
         <g class="nav-mark-outer">
           <rect x="5" y="5" width="38" height="38" rx="1"
                 stroke="#A8874A" stroke-width="0.9" fill="none"
