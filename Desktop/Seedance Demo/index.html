@@ -311,6 +311,79 @@
       .project-type { display: none; }
       .featured-caption { left: 28px; bottom: 28px; }
     }
+
+    /* ── DARK MODE TOGGLE ── */
+    .theme-toggle {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 10px 6px 12px;
+      background: var(--bg);
+      border: 1px solid rgba(168,135,74,.35);
+      border-radius: 999px;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+      box-shadow: 0 2px 16px rgba(0,0,0,.45), 0 0 0 0 rgba(168,135,74,0);
+      transition: box-shadow 0.3s cubic-bezier(.25,1,.5,1), border-color 0.3s cubic-bezier(.25,1,.5,1);
+    }
+    .theme-toggle:hover {
+      border-color: rgba(168,135,74,.6);
+      box-shadow: 0 2px 20px rgba(0,0,0,.55), 0 0 12px rgba(168,135,74,.08);
+    }
+    .theme-toggle:focus-visible {
+      outline: 2px solid rgba(168,135,74,.7);
+      outline-offset: 3px;
+    }
+    .theme-toggle:active {
+      transform: scale(0.97);
+    }
+    .theme-toggle__label {
+      font-family: 'Syne', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.25s cubic-bezier(.25,1,.5,1);
+      line-height: 1;
+    }
+    .theme-toggle__label.active {
+      color: var(--gold);
+    }
+    .theme-toggle__track {
+      width: 36px;
+      height: 20px;
+      border-radius: 10px;
+      background: rgba(168,135,74,.12);
+      border: 1px solid rgba(168,135,74,.25);
+      position: relative;
+      flex-shrink: 0;
+    }
+    .theme-toggle__knob {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: var(--gold);
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 1px 4px rgba(0,0,0,.4);
+    }
+    .theme-toggle.toggled .theme-toggle__knob {
+      transform: translateX(16px);
+    }
+    .theme-toggle.toggled .theme-toggle__label.dark-label {
+      color: var(--muted);
+    }
+    .theme-toggle.toggled .theme-toggle__label.light-label {
+      color: var(--gold);
+    }
   </style>
 </head>
 <body>
@@ -434,6 +507,14 @@
       }
     }, { passive: true });
   </script>
+
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle color mode">
+    <span class="theme-toggle__label dark-label active">Dark</span>
+    <div class="theme-toggle__track">
+      <div class="theme-toggle__knob"></div>
+    </div>
+    <span class="theme-toggle__label light-label">Light</span>
+  </button>
 
 </body>
 </html>
