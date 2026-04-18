@@ -341,12 +341,68 @@
       color: var(--muted); opacity: .4;
     }
 
+    /* ── VISUAL ARCHIVE (REEL) ── */
+    .reel { padding: 120px 0 0; }
+    .reel-header {
+      display: flex; align-items: center;
+      justify-content: space-between;
+      padding-bottom: 40px;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 40px;
+    }
+    .reel-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300; font-size: 13px; letter-spacing: .4em;
+      text-transform: uppercase; color: var(--muted);
+    }
+    .reel-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .reel-card {
+      position: relative;
+      aspect-ratio: 16/9;
+      overflow: hidden;
+      cursor: pointer;
+      background: #000;
+    }
+    .reel-card video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94);
+    }
+    .reel-card:hover video { transform: scale(1.03); }
+    .reel-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(8,8,7,.82) 0%, rgba(8,8,7,.28) 55%, transparent 100%);
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 22px 24px;
+      transition: opacity 0.4s ease-out;
+    }
+    .reel-card:hover .reel-overlay { opacity: 0; }
+    .reel-card-label {
+      font-family: 'Syne', sans-serif;
+      font-size: 9px; font-weight: 600; letter-spacing: .36em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 6px;
+    }
+    .reel-card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300; font-style: italic;
+      font-size: clamp(20px, 2vw, 28px);
+      letter-spacing: -.01em; color: var(--text);
+      line-height: 1.15;
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 1024px) {
       .studio-grid { grid-template-columns: 1fr 1fr; }
       .studio-blueprint { grid-column: auto; }
     }
     @media (max-width: 768px) {
+      .reel-grid { grid-template-columns: 1fr; }
       .wrap { padding: 0 28px; }
       nav {
         padding: 22px 28px;
@@ -450,6 +506,45 @@
     </div>
   </section>
 
+  <!-- VISUAL ARCHIVE -->
+  <section class="reel">
+    <div class="wrap">
+      <div class="reel-header">
+        <span class="section-label">Visual Archive</span>
+        <span class="reel-title">2022 — 2024</span>
+      </div>
+      <div class="reel-grid">
+        <div class="reel-card">
+          <video muted loop playsinline preload="none">
+            <source src="Crew Automate.mp4" type="video/mp4">
+          </video>
+          <div class="reel-overlay">
+            <span class="reel-card-label">Commercial — 2024</span>
+            <span class="reel-card-title">Crew Automate</span>
+          </div>
+        </div>
+        <div class="reel-card">
+          <video muted loop playsinline preload="none">
+            <source src="Real Life Skycraper.mp4" type="video/mp4">
+          </video>
+          <div class="reel-overlay">
+            <span class="reel-card-label">Documentation — 2023</span>
+            <span class="reel-card-title">Real Life Skyscraper</span>
+          </div>
+        </div>
+        <div class="reel-card">
+          <video muted loop playsinline preload="none">
+            <source src="Skycraper.mp4" type="video/mp4">
+          </video>
+          <div class="reel-overlay">
+            <span class="reel-card-label">Study — 2022</span>
+            <span class="reel-card-title">Skyscraper</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- STATS BAR -->
   <div class="stats-bar" style="margin-top:80px;">
     <div class="wrap">
@@ -528,5 +623,12 @@
   </footer>
 
 
+  <script>
+    document.querySelectorAll('.reel-card').forEach(card => {
+      const video = card.querySelector('video');
+      card.addEventListener('mouseenter', () => video.play());
+      card.addEventListener('mouseleave', () => { video.pause(); video.currentTime = 0; });
+    });
+  </script>
 </body>
 </html>
