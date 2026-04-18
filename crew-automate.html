@@ -1955,7 +1955,8 @@
   }
 
   function draw() {
-    ctx.clearRect(0, 0, W, H);
+    ctx.fillStyle = '#080E1A';
+    ctx.fillRect(0, 0, W, H);
     for (let i = 0; i < nodes.length; i++) {
       const a = nodes[i];
       a.x += a.vx; a.y += a.vy;
