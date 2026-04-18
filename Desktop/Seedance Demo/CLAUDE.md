@@ -47,4 +47,10 @@ Single `index.html` — all HTML, CSS, and JS inline. No build step, no framewor
 
 ## Seedance Skill
 
-`.claude/SKILL.md` contains a skill for generating Seedance 2 looping video prompts. Trigger it when the user asks for video prompts, background loops, or mentions Seedance.
+`.claude/SKILL.md` (skill name: `seedance-loop-prompt`) generates Seedance 2 looping video prompts. Trigger it when the user asks for video prompts, background loops, or mentions Seedance.
+
+Calibration examples are in `example-prompts.md` — three complete prompt outputs showing expected structure and detail level (headphones deconstruction, luxury watch, sports car city flythrough).
+
+## Brand Assets
+
+`Architecture.png` and `Blueprint.png` are project images available for use in the site. `dribbble.com_shots_*.png` is a design reference screenshot.

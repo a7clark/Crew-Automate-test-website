@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Crew Automate — High-Rise Architecture</title>
+  <title>Crew Automate — Residential Architecture</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,12 +12,13 @@
   <style>
     :root {
       --bg:       #080807;
-      --surface:  #0f0f0e;
+      --surface:  #0d0d0c;
       --gold:     #A8874A;
+      --gold-dim: rgba(168,135,74,.18);
       --stone:    #8C7B68;
       --text:     #F0EDE8;
       --muted:    #6A6760;
-      --rule:     rgba(240,237,232,0.08);
+      --rule:     rgba(240,237,232,0.07);
     }
 
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -33,32 +34,31 @@
     nav {
       position: fixed; top:0; left:0; right:0; z-index:100;
       display: flex; align-items: center; justify-content: space-between;
-      padding: 28px 56px;
-      background: transparent;
-      border-bottom: 1px solid transparent;
-      transition: background 0.5s ease, border-color 0.5s ease, backdrop-filter 0.5s ease;
+      padding: 32px 64px;
+      transition: background 0.6s ease, border-color 0.6s ease, backdrop-filter 0.6s ease, padding 0.4s ease;
     }
     nav.scrolled {
-      background: rgba(8,8,7,0.90);
+      background: rgba(8,8,7,0.88);
       border-bottom: 1px solid var(--rule);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 22px 64px;
     }
     .nav-wordmark {
-      font-weight: 800; font-size: 12px; letter-spacing: .28em;
+      font-weight: 800; font-size: 11px; letter-spacing: .32em;
       text-transform: uppercase; color: var(--text); text-decoration: none;
     }
-    .nav-links { display:flex; gap:48px; list-style:none; }
+    .nav-links { display:flex; gap:52px; list-style:none; }
     .nav-links a {
-      font-size: 10px; font-weight: 500; letter-spacing: .22em;
-      text-transform: uppercase; color: rgba(240,237,232,.5);
+      font-size: 9px; font-weight: 600; letter-spacing: .26em;
+      text-transform: uppercase; color: rgba(240,237,232,.45);
       text-decoration: none; position: relative;
       transition: color .3s;
     }
     .nav-links a::after {
-      content:''; position:absolute; left:0; bottom:-3px;
+      content:''; position:absolute; left:0; bottom:-4px;
       width:0; height:1px; background:var(--gold);
-      transition: width .35s cubic-bezier(.25,1,.5,1);
+      transition: width .4s cubic-bezier(.25,1,.5,1);
     }
     .nav-links a:hover { color:var(--text); }
     .nav-links a:hover::after { width:100%; }
@@ -74,46 +74,71 @@
       width: 100%; height: 100%;
       object-fit: cover;
     }
+    /* subtle vignette bottom fade into page bg */
     .hero::after {
       content: '';
-      position: absolute; bottom: 0; left: 0; right: 0; height: 30%;
+      position: absolute; bottom: 0; left: 0; right: 0; height: 28%;
       background: linear-gradient(to top, var(--bg), transparent);
       pointer-events: none;
     }
+    /* thin side vignettes for depth */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0; z-index: 1;
+      background:
+        radial-gradient(ellipse 60% 100% at 0% 50%, rgba(8,8,7,.45) 0%, transparent 70%),
+        radial-gradient(ellipse 60% 100% at 100% 50%, rgba(8,8,7,.45) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ── DIVIDER ── */
+    .section-divider {
+      width: 100%; height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-dim) 30%, var(--gold-dim) 70%, transparent);
+    }
 
     /* ── SHARED ── */
-    .wrap { max-width:1280px; margin:0 auto; padding:0 56px; }
+    .wrap { max-width:1320px; margin:0 auto; padding:0 64px; }
     .section-label {
-      font-size: 9px; font-weight: 600; letter-spacing: .36em;
+      font-size: 9px; font-weight: 600; letter-spacing: .38em;
       text-transform: uppercase; color: var(--gold);
       display: flex; align-items: center; gap: 14px;
     }
     .section-label::before {
-      content:''; width:20px; height:1px;
-      background:var(--gold); opacity:.5; flex-shrink:0;
+      content:''; width:24px; height:1px;
+      background:var(--gold); opacity:.45; flex-shrink:0;
     }
 
     /* ── SELECTED WORK ── */
-    .work { padding: 120px 0 0; }
+    .work { padding: 140px 0 0; }
     .work-header {
-      display: flex; align-items: center;
+      display: flex; align-items: flex-end;
       justify-content: space-between;
-      padding-bottom: 40px;
+      padding-bottom: 44px;
       border-bottom: 1px solid var(--rule);
+      margin-bottom: 0;
     }
-    .work-title {
+    .work-header-left { display: flex; flex-direction: column; gap: 18px; }
+    .work-heading {
       font-family: 'Cormorant Garamond', serif;
-      font-weight: 300; font-size: 13px; letter-spacing: .4em;
+      font-weight: 300; font-size: clamp(36px, 4.5vw, 58px);
+      letter-spacing: -.02em; line-height: 1;
+      color: var(--text);
+    }
+    .work-range {
+      font-size: 10px; font-weight: 500; letter-spacing: .22em;
       text-transform: uppercase; color: var(--muted);
     }
-    .project-list { border-bottom: 1px solid var(--rule); }
+
+    /* Project rows */
+    .project-list { margin-bottom: 0; }
     .project-row {
       display: grid;
-      grid-template-columns: 56px 1fr auto auto;
+      grid-template-columns: 48px 1fr 160px 64px;
       align-items: center;
-      gap: 0 40px;
-      padding: 36px 0;
-      border-top: 1px solid var(--rule);
+      gap: 0 48px;
+      padding: 38px 0;
+      border-bottom: 1px solid var(--rule);
       cursor: default;
       position: relative;
       overflow: hidden;
@@ -121,109 +146,169 @@
     .project-row::before {
       content: '';
       position: absolute; inset: 0;
-      background: rgba(168,135,74,.03);
-      transform: scaleY(0); transform-origin: bottom;
-      transition: transform .3s cubic-bezier(.25,1,.5,1);
+      background: linear-gradient(90deg, rgba(168,135,74,.04), transparent);
+      transform: translateX(-100%);
+      transition: transform .5s cubic-bezier(.25,1,.5,1);
     }
-    .project-row:hover::before { transform: scaleY(1); }
+    .project-row:hover::before { transform: translateX(0); }
     .project-index {
-      font-size: 11px; letter-spacing: .12em;
-      color: var(--muted); font-weight: 500; padding-top: 4px;
+      font-size: 10px; letter-spacing: .14em;
+      color: var(--muted); font-weight: 500;
+      font-variant-numeric: tabular-nums;
     }
     .project-name {
       font-family: 'Cormorant Garamond', serif;
-      font-weight: 400; font-size: clamp(28px, 3vw, 42px);
-      letter-spacing: -.01em; color: var(--text);
+      font-weight: 400; font-size: clamp(26px, 2.8vw, 40px);
+      letter-spacing: -.015em; color: var(--text);
+      transition: color .3s;
     }
+    .project-row:hover .project-name { color: rgba(240,237,232,.75); }
     .project-type {
-      font-size: 10px; letter-spacing: .18em; text-transform: uppercase;
+      font-size: 9px; letter-spacing: .22em; text-transform: uppercase;
       color: var(--muted); text-align: right; white-space: nowrap;
     }
     .project-year {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 18px; color: var(--stone);
-      text-align: right; white-space: nowrap; min-width: 52px;
+      font-size: 17px; color: var(--stone);
+      text-align: right; white-space: nowrap;
+      font-variant-numeric: tabular-nums;
     }
 
     /* Featured image */
     .featured {
-      margin-top: 80px; margin-bottom: 120px;
+      margin-top: 96px; margin-bottom: 140px;
       position: relative; aspect-ratio: 16/7; overflow: hidden;
+      border: 1px solid var(--rule);
     }
     .featured img {
       width: 100%; height: 100%;
       object-fit: cover;
-      filter: brightness(.85) saturate(.8);
-      transition: transform .8s cubic-bezier(.25,1,.5,1);
+      filter: brightness(.8) saturate(.7);
+      transition: transform 1s cubic-bezier(.25,1,.5,1), filter .6s ease;
     }
-    .featured:hover img { transform: scale(1.02); }
+    .featured:hover img {
+      transform: scale(1.03);
+      filter: brightness(.88) saturate(.85);
+    }
     .featured::after {
       content: '';
-      position: absolute; bottom: 0; left: 0; right: 0; height: 50%;
-      background: linear-gradient(to top, rgba(8,8,7,.75), transparent);
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(8,8,7,.8) 0%, rgba(8,8,7,.1) 50%, transparent 100%);
       pointer-events: none;
     }
     .featured-caption {
-      position: absolute; bottom: 32px; left: 40px;
-      display: flex; flex-direction: column; gap: 6px; z-index: 1;
+      position: absolute; bottom: 40px; left: 48px;
+      display: flex; flex-direction: column; gap: 8px; z-index: 1;
     }
     .featured-label {
-      font-size: 9px; letter-spacing: .3em; text-transform: uppercase;
-      color: rgba(240,237,232,.5);
+      font-size: 9px; letter-spacing: .32em; text-transform: uppercase;
+      color: var(--gold); opacity: .7;
     }
     .featured-name {
       font-family: 'Cormorant Garamond', serif;
-      font-weight: 300; font-size: 28px; color: var(--text);
-      letter-spacing: -.01em;
+      font-weight: 300; font-size: clamp(22px, 2.5vw, 34px);
+      color: var(--text); letter-spacing: -.01em;
+    }
+    .featured-detail {
+      font-size: 9px; letter-spacing: .2em; text-transform: uppercase;
+      color: rgba(240,237,232,.35); margin-top: 4px;
     }
 
     /* ── FOOTER ── */
     footer {
       background: var(--surface);
-      border-top: 1px solid rgba(168,135,74,.18);
-      padding: 80px 0 52px;
+      border-top: 1px solid var(--gold-dim);
+      padding: 88px 0 56px;
     }
     .footer-top {
       display: flex; justify-content: space-between;
-      align-items: flex-end; padding-bottom: 56px;
+      align-items: flex-end; padding-bottom: 60px;
       border-bottom: 1px solid var(--rule);
+      gap: 48px;
     }
+    .footer-left { display: flex; flex-direction: column; gap: 12px; }
     .footer-firm {
-      font-weight: 800; font-size: 11px; letter-spacing: .3em;
-      text-transform: uppercase; color: var(--text); margin-bottom: 8px;
+      font-weight: 800; font-size: 11px; letter-spacing: .32em;
+      text-transform: uppercase; color: var(--text);
     }
-    .footer-descriptor { font-size: 12px; color: var(--muted); letter-spacing: .05em; }
+    .footer-descriptor {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px; color: var(--stone);
+      font-weight: 300; letter-spacing: .02em;
+    }
+    .footer-location {
+      font-size: 9px; letter-spacing: .22em; text-transform: uppercase;
+      color: var(--muted); opacity: .55; margin-top: 4px;
+    }
+    .footer-right { text-align: right; }
     .footer-cta-label {
-      font-size: 9px; letter-spacing: .3em; text-transform: uppercase;
-      color: var(--gold); opacity: .65; margin-bottom: 8px;
+      font-size: 9px; letter-spacing: .32em; text-transform: uppercase;
+      color: var(--gold); opacity: .6; margin-bottom: 10px;
     }
     .footer-email {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 22px; color: var(--text);
+      font-size: 24px; color: var(--text);
       text-decoration: none; letter-spacing: .02em;
-      transition: color .3s;
+      display: block;
+      transition: color .3s, transform .3s;
+      transform-origin: right;
     }
     .footer-email:hover { color: var(--gold); }
     .footer-bottom {
       display: flex; justify-content: space-between;
-      align-items: center; padding-top: 28px;
+      align-items: center; padding-top: 32px;
     }
-    .footer-copy { font-size: 10px; letter-spacing: .07em; color: var(--muted); opacity: .4; }
+    .footer-copy {
+      font-size: 9px; letter-spacing: .1em; color: var(--muted); opacity: .35;
+    }
+
+    /* ── SCROLL INDICATOR ── */
+    .scroll-cue {
+      position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+      z-index: 10; display: flex; flex-direction: column; align-items: center; gap: 10px;
+      opacity: 0;
+      animation: fadeInCue 1s ease 1.2s forwards;
+    }
+    .scroll-cue-line {
+      width: 1px; height: 48px;
+      background: linear-gradient(to bottom, rgba(168,135,74,.7), transparent);
+      animation: scrollPulse 2s ease-in-out 2s infinite;
+    }
+    .scroll-cue-label {
+      font-size: 8px; letter-spacing: .3em; text-transform: uppercase;
+      color: rgba(168,135,74,.5);
+      transform: rotate(90deg) translateX(8px);
+      white-space: nowrap;
+    }
+    @keyframes fadeInCue {
+      to { opacity: 1; }
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: .5; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.12); }
+    }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 768px) {
-      .wrap { padding: 0 28px; }
-      nav { padding: 22px 28px; }
-      .work { padding-top: 80px; }
+    @media (max-width: 900px) {
+      .wrap { padding: 0 40px; }
+      nav { padding: 26px 40px; }
+      nav.scrolled { padding: 18px 40px; }
+      .work { padding-top: 100px; }
       .project-row { grid-template-columns: 40px 1fr auto; }
       .project-year { display: none; }
-      footer { padding: 60px 0 40px; }
-      .footer-top { flex-direction: column; gap: 40px; align-items: flex-start; }
-      .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+      .featured { margin-top: 64px; margin-bottom: 100px; }
+      footer { padding: 64px 0 44px; }
+      .footer-top { flex-direction: column; gap: 48px; align-items: flex-start; }
+      .footer-right { text-align: left; }
     }
-    @media (max-width: 540px) {
-      .nav-links { gap: 28px; }
-      .project-name { font-size: 26px; }
+    @media (max-width: 600px) {
+      .wrap { padding: 0 28px; }
+      nav { padding: 22px 28px; }
+      nav.scrolled { padding: 16px 28px; }
+      .nav-links { gap: 32px; }
+      .project-row { grid-template-columns: 36px 1fr; gap: 0 24px; }
+      .project-type { display: none; }
+      .featured-caption { left: 28px; bottom: 28px; }
     }
   </style>
 </head>
@@ -238,90 +323,116 @@
     </ul>
   </nav>
 
-  <!-- HERO -->
+  <!-- HERO: full-viewport video, no text -->
   <section class="hero">
     <video autoplay muted loop playsinline preload="auto">
-      <source src="Crew Automate.mp4" type="video/mp4">
+      <source src="Crew%20Automate.mp4" type="video/mp4">
     </video>
+    <div class="scroll-cue">
+      <div class="scroll-cue-line"></div>
+      <span class="scroll-cue-label">Scroll</span>
+    </div>
   </section>
 
   <!-- SELECTED WORK -->
   <section class="work" id="work">
     <div class="wrap">
+
       <div class="work-header">
-        <span class="section-label">Selected Work</span>
-        <span class="work-title">2018 — 2025</span>
+        <div class="work-header-left">
+          <span class="section-label">Selected Work</span>
+          <h2 class="work-heading">Residences</h2>
+        </div>
+        <span class="work-range">2019 — 2025</span>
       </div>
+
       <div class="project-list">
         <div class="project-row">
           <span class="project-index">01</span>
-          <span class="project-name">The Meridian Tower</span>
-          <span class="project-type">High-Rise</span>
+          <span class="project-name">The Meridian</span>
+          <span class="project-type">Private Residence</span>
           <span class="project-year">2025</span>
         </div>
         <div class="project-row">
           <span class="project-index">02</span>
-          <span class="project-name">Halcyon Park District</span>
-          <span class="project-type">Mixed-Use</span>
+          <span class="project-name">Halcyon House</span>
+          <span class="project-type">Private Residence</span>
           <span class="project-year">2024</span>
         </div>
         <div class="project-row">
           <span class="project-index">03</span>
-          <span class="project-name">Vertex Corporate Campus</span>
-          <span class="project-type">Commercial</span>
+          <span class="project-name">Vertex Compound</span>
+          <span class="project-type">Estate</span>
           <span class="project-year">2023</span>
         </div>
         <div class="project-row">
           <span class="project-index">04</span>
-          <span class="project-name">The Sable Residential Tower</span>
-          <span class="project-type">High-Rise</span>
+          <span class="project-name">The Sable</span>
+          <span class="project-type">Private Residence</span>
           <span class="project-year">2022</span>
         </div>
         <div class="project-row">
           <span class="project-index">05</span>
-          <span class="project-name">Nova Plaza</span>
-          <span class="project-type">Commercial</span>
-          <span class="project-year">2020</span>
+          <span class="project-name">Nova House</span>
+          <span class="project-type">Private Residence</span>
+          <span class="project-year">2019</span>
         </div>
       </div>
+
       <div class="featured">
-        <img src="https://placehold.co/1280x560/1a1a18/888880?text=The+Meridian+Tower" alt="The Meridian Tower">
+        <img src="https://placehold.co/1320x580/141412/4a4a48?text=" alt="The Meridian — 2025">
         <div class="featured-caption">
-          <span class="featured-label">Featured Project — 2025</span>
-          <span class="featured-name">The Meridian Tower</span>
+          <span class="featured-label">Featured Project</span>
+          <span class="featured-name">The Meridian</span>
+          <span class="featured-detail">Private Residence &nbsp;·&nbsp; 2025</span>
         </div>
       </div>
+
     </div>
   </section>
+
+  <div class="section-divider"></div>
 
   <!-- FOOTER -->
   <footer id="contact">
     <div class="wrap">
       <div class="footer-top">
-        <div>
+        <div class="footer-left">
           <div class="footer-firm">Crew Automate</div>
-          <div class="footer-descriptor">High-Rise & Commercial Architecture</div>
+          <div class="footer-descriptor">Residential Architecture</div>
+          <div class="footer-location">crewautomate.ai</div>
         </div>
-        <div style="text-align:right;">
-          <div class="footer-cta-label">Start a conversation</div>
+        <div class="footer-right">
+          <div class="footer-cta-label">Begin a conversation</div>
           <a href="mailto:hello@crewautomate.ai" class="footer-email">hello@crewautomate.ai</a>
         </div>
       </div>
       <div class="footer-bottom">
         <span class="footer-copy">© 2026 Crew Automate. All rights reserved.</span>
-        <span class="footer-copy">Built for the vertical age.</span>
+        <span class="footer-copy">Architecture for how you live.</span>
       </div>
     </div>
   </footer>
 
   <script>
     const nav = document.getElementById('nav');
-    const threshold = window.innerHeight * 0.6;
     function updateNav() {
-      nav.classList.toggle('scrolled', window.scrollY > threshold);
+      nav.classList.toggle('scrolled', window.scrollY > 60);
     }
     window.addEventListener('scroll', updateNav, { passive: true });
     updateNav();
+
+    // Hide scroll cue after first scroll
+    let cueDismissed = false;
+    const cue = document.querySelector('.scroll-cue');
+    window.addEventListener('scroll', () => {
+      if (!cueDismissed && window.scrollY > 80) {
+        cueDismissed = true;
+        cue.style.transition = 'opacity .6s ease';
+        cue.style.opacity = '0';
+      }
+    }, { passive: true });
   </script>
+
 </body>
 </html>
