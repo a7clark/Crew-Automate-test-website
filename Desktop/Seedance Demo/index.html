@@ -11,14 +11,14 @@
 
   <style>
     :root {
-      --bg:      #080807;
-      --surface: #0f0f0e;
-      --gold:    #A8874A;
-      --gold-dim: rgba(168,135,74,0.14);
-      --stone:   #8C7B68;
-      --text:    #F0EDE8;
-      --muted:   #6A6760;
-      --rule:    rgba(240,237,232,0.08);
+      --bg:      #F6F3EE;
+      --surface: #EDEAE4;
+      --gold:    #7A5C28;
+      --gold-dim: rgba(122,92,40,0.10);
+      --stone:   #6B5E4E;
+      --text:    #1A1712;
+      --muted:   #8C8780;
+      --rule:    rgba(26,23,18,0.10);
     }
 
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
@@ -42,19 +42,19 @@
       transition: background 0.5s ease, border-color 0.5s ease, backdrop-filter 0.5s ease;
     }
     nav.scrolled {
-      background: rgba(8,8,7,0.88);
+      background: rgba(246,243,238,0.92);
       border-bottom: 1px solid var(--rule);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
     }
     .nav-wordmark {
       font-weight: 800; font-size: 12px; letter-spacing: .28em;
-      text-transform: uppercase; color: #F0EDE8; text-decoration: none;
+      text-transform: uppercase; color: var(--text); text-decoration: none;
     }
     .nav-links { display:flex; gap:48px; list-style:none; }
     .nav-links a {
       font-size: 10px; font-weight: 500; letter-spacing: .22em;
-      text-transform: uppercase; color: rgba(240,237,232,.6);
+      text-transform: uppercase; color: rgba(26,23,18,.5);
       text-decoration: none; position: relative;
       transition: color .3s;
     }
@@ -179,7 +179,7 @@
     }
     .featured-label {
       font-size: 9px; letter-spacing: .3em; text-transform: uppercase;
-      color: rgba(240,237,232,.5);
+      color: rgba(26,23,18,.5);
     }
     .featured-name {
       font-family: 'Cormorant Garamond', serif;
@@ -190,7 +190,7 @@
     .featured::after {
       content: '';
       position: absolute; bottom: 0; left: 0; right: 0; height: 50%;
-      background: linear-gradient(to top, rgba(8,8,7,.75), transparent);
+      background: linear-gradient(to top, rgba(246,243,238,.85), transparent);
       pointer-events: none;
     }
     .featured-caption { z-index: 1; }
@@ -280,7 +280,7 @@
     /* ── FOOTER ── */
     footer {
       background: var(--surface);
-      border-top: 1px solid rgba(168,135,74,.18);
+      border-top: 1px solid rgba(122,92,40,.2);
       padding: 80px 0 52px;
     }
     .footer-top {
