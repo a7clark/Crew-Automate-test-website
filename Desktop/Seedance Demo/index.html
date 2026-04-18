@@ -20,6 +20,20 @@
       --muted:    #6A6760;
       --rule:     rgba(240,237,232,0.07);
     }
+    html.light-mode {
+      --bg:       #F5F2ED;
+      --surface:  #EDE9E3;
+      --gold:     #8B6A35;
+      --gold-dim: rgba(139,106,53,.15);
+      --stone:    #6B5C4E;
+      --text:     #1A1917;
+      --muted:    #9A8F85;
+      --rule:     rgba(26,25,23,0.1);
+    }
+    html.light-mode nav.scrolled {
+      background: rgba(245,242,237,0.88);
+    }
+    html { transition: background 0.4s cubic-bezier(.25,1,.5,1); }
 
     *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
     html { scroll-behavior: smooth; }
@@ -66,7 +80,8 @@
     /* ── HERO ── */
     .hero {
       position: relative;
-      width: 100vw; height: 100vh;
+      width: 90vw; height: 100vh;
+      margin: 0 auto;
       overflow: hidden; background: #000;
     }
     .hero video {
@@ -508,7 +523,7 @@
     }, { passive: true });
   </script>
 
-  <button class="theme-toggle" id="themeToggle" aria-hidden="true" tabindex="-1">
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle light/dark mode">
     <span class="theme-toggle__label dark-label active">Dark</span>
     <div class="theme-toggle__track">
       <div class="theme-toggle__knob"></div>
@@ -517,17 +532,18 @@
   </button>
 
   <script>
-    // Dark mode toggle (cosmetic — snaps back after 1.5s)
+    // Theme toggle — persists via localStorage
     const themeToggle = document.getElementById('themeToggle');
     if (themeToggle) {
-      let toggleTimeout = null;
-      themeToggle.addEventListener('click', () => {
-        if (toggleTimeout) return;
+      const isLight = localStorage.getItem('theme') === 'light';
+      if (isLight) {
+        document.documentElement.classList.add('light-mode');
         themeToggle.classList.add('toggled');
-        toggleTimeout = setTimeout(() => {
-          themeToggle.classList.remove('toggled');
-          toggleTimeout = null;
-        }, 1500);
+      }
+      themeToggle.addEventListener('click', () => {
+        const light = document.documentElement.classList.toggle('light-mode');
+        themeToggle.classList.toggle('toggled', light);
+        localStorage.setItem('theme', light ? 'light' : 'dark');
       });
     }
   </script>
