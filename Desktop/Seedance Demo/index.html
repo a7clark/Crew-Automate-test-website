@@ -506,30 +506,31 @@
         cue.style.opacity = '0';
       }
     }, { passive: true });
-
-    // Dark mode toggle (cosmetic — snaps back after 1.5s)
-    document.addEventListener('DOMContentLoaded', () => {
-      const themeToggle = document.getElementById('themeToggle');
-      if (!themeToggle) return;
-      let toggleTimeout = null;
-      themeToggle.addEventListener('click', () => {
-        if (toggleTimeout) return; // ignore clicks while animating
-        themeToggle.classList.add('toggled');
-        toggleTimeout = setTimeout(() => {
-          themeToggle.classList.remove('toggled');
-          toggleTimeout = null;
-        }, 1500);
-      });
-    });
   </script>
 
-  <button class="theme-toggle" id="themeToggle" aria-label="Toggle color mode">
+  <button class="theme-toggle" id="themeToggle" aria-hidden="true" tabindex="-1">
     <span class="theme-toggle__label dark-label active">Dark</span>
     <div class="theme-toggle__track">
       <div class="theme-toggle__knob"></div>
     </div>
     <span class="theme-toggle__label light-label">Light</span>
   </button>
+
+  <script>
+    // Dark mode toggle (cosmetic — snaps back after 1.5s)
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+      let toggleTimeout = null;
+      themeToggle.addEventListener('click', () => {
+        if (toggleTimeout) return;
+        themeToggle.classList.add('toggled');
+        toggleTimeout = setTimeout(() => {
+          themeToggle.classList.remove('toggled');
+          toggleTimeout = null;
+        }, 1500);
+      });
+    }
+  </script>
 
 </body>
 </html>
