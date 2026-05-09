@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Automation Society — Automate Together. Scale Faster.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --base-color-brand--black: #060F1C;
+      --base-color-brand--white: #ffffff;
+      --base-color-brand--purple: #0A9EE0;
+      --base-color-brand--green: #00D4E8;
+      --base-color-brand--purple-200: #BAE8FF;
+      --base-color-brand--purple-100: #DFF4FF;
+      --base-color-brand--purple-300: #7DD3FA;
+      --base-color-brand--green-300: #5EEAF5;
+      --base-color-brand--green-200: #99EEF7;
+      --base-color-brand--green-100: #CCF7FC;
+      --base-color-brand--dark-blue-200: #030A14;
+      --base-color-brand--dark-blue-100: #040C18;
+      --neutral-lighter: #9895a1;
+      --neutral-light: #aaa;
+      --neutral: #666;
+      --neutral-dark: #444;
+      --neutral-darker: #1e2a3a;
+    }
+
+    * {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--base-color-brand--black);
+      color: var(--base-color-brand--white);
+      font-family: 'Montserrat', Arial, sans-serif;
+      font-size: 1rem;
+      line-height: 1.6;
+      letter-spacing: 0.01em;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 0 3px rgba(0,212,232,0.15); }
+      50%       { box-shadow: 0 0 0 5px rgba(0,212,232,0.3); }
+    }
+    @keyframes floatY {
+      0%, 100% { transform: translateY(0px); }
+      50%       { transform: translateY(-8px); }
+    }
+
+    .anim-fade-up    { animation: fadeUp 0.65s ease both; }
+    .anim-d1         { animation: fadeUp 0.65s 0.10s ease both; }
+    .anim-d2         { animation: fadeUp 0.65s 0.20s ease both; }
+    .anim-d3         { animation: fadeUp 0.65s 0.32s ease both; }
+    .anim-d4         { animation: fadeUp 0.65s 0.46s ease both; }
+    .anim-float      { animation: floatY 5s ease-in-out infinite; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(7, 0, 31, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(110, 69, 255, 0.12);
+    }
+    .nav-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 28px;
+      height: 66px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: white;
+      text-decoration: none;
+    }
+    .nav-logo-icon {
+      width: 30px; height: 30px;
+      background: var(--base-color-brand--purple);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+      list-style: none;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--neutral-lighter);
+      font-size: 0.9rem;
+      font-weight: 500;
+      padding: 7px 14px;
+      border-radius: 8px;
+      transition: color 0.18s, background 0.18s;
+    }
+    .nav-links a:hover { color: white; background: rgba(255,255,255,0.06); }
+    .nav-links a:focus-visible { outline: 2px solid var(--base-color-brand--purple); outline-offset: 2px; }
+    .nav-actions { display: flex; align-items: center; gap: 8px; }
+
+    /* ── BUTTONS ── */
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.16);
+      color: white;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color 0.18s, background 0.18s;
+      font-family: inherit;
+    }
+    .btn-ghost:hover { border-color: rgba(255,255,255,0.32); background: rgba(255,255,255,0.05); }
+    .btn-ghost:focus-visible { outline: 2px solid var(--base-color-brand--purple); outline-offset: 2px; }
+    .btn-ghost:active { opacity: 0.85; }
+
+    .btn-green {
+      background: var(--base-color-brand--green);
+      color: var(--base-color-brand--black);
+      border: none;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: 0.875rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.18s, transform 0.14s;
+      font-family: inherit;
+    }
+    .btn-green:hover { background: var(--base-color-brand--green-300); transform: translateY(-1px); }
+    .btn-green:active { transform: translateY(0); }
+    .btn-green:focus-visible { outline: 2px solid var(--base-color-brand--green); outline-offset: 2px; }
+
+    .btn-green-lg {
+      background: var(--base-color-brand--green);
+      color: var(--base-color-brand--black);
+      border: none;
+      padding: 13px 26px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.18s, transform 0.14s;
+      font-family: inherit;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-green-lg:hover { background: var(--base-color-brand--green-300); transform: translateY(-1px); }
+    .btn-green-lg:active { transform: translateY(0); }
+    .btn-green-lg:focus-visible { outline: 2px solid var(--base-color-brand--green); outline-offset: 2px; }
+
+    .btn-outline-lg {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.18);
+      color: white;
+      padding: 13px 26px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color 0.18s, background 0.18s, transform 0.14s;
+      font-family: inherit;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+    .btn-outline-lg:hover { border-color: rgba(255,255,255,0.35); background: rgba(255,255,255,0.04); transform: translateY(-1px); }
+    .btn-outline-lg:active { transform: translateY(0); }
+    .btn-outline-lg:focus-visible { outline: 2px solid var(--base-color-brand--purple); outline-offset: 2px; }
+
+    /* ── LAYOUT ── */
+    .wrap {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      padding-top: 124px;
+      padding-bottom: 80px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-glow-1 {
+      position: absolute;
+      top: -80px; left: 50%;
+      transform: translateX(-60%);
+      width: 800px; height: 600px;
+      background: radial-gradient(ellipse at center, rgba(10,158,224,0.18) 0%, transparent 68%);
+      pointer-events: none;
+    }
+    .hero-glow-2 {
+      position: absolute;
+      top: 40px; right: -60px;
+      width: 440px; height: 440px;
+      background: radial-gradient(ellipse at center, rgba(0,212,232,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+      position: relative;
+      z-index: 1;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(10,158,224,0.12);
+      border: 1px solid rgba(10,158,224,0.28);
+      border-radius: 100px;
+      padding: 5px 14px 5px 8px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--base-color-brand--purple-200);
+      margin-bottom: 22px;
+    }
+    .badge-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--base-color-brand--green);
+      flex-shrink: 0;
+      animation: pulseGlow 2.2s ease-in-out infinite;
+    }
+    .hero-h1 {
+      font-size: clamp(2.3rem, 4.8vw, 3.3rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      color: white;
+      margin-bottom: 18px;
+      font-family: 'Roboto Mono', monospace;
+    }
+    .hero-h1 .accent {
+      background: linear-gradient(120deg, var(--base-color-brand--purple), var(--base-color-brand--green));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .hero-sub {
+      font-size: 1.05rem;
+      color: var(--neutral-lighter);
+      line-height: 1.72;
+      margin-bottom: 34px;
+      max-width: 460px;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* ── DASHBOARD MOCKUP ── */
+    .dash-wrap {
+      position: relative;
+    }
+    .dash-wrap::before {
+      content: '';
+      position: absolute;
+      inset: -30px;
+      background: radial-gradient(ellipse at 60% 50%, rgba(10,158,224,0.1) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .dash-card {
+      background: rgba(13, 6, 40, 0.92);
+      border: 1px solid rgba(10,158,224,0.22);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow:
+        0 32px 80px rgba(0,0,0,0.55),
+        0 0 0 1px rgba(10,158,224,0.08),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+      position: relative;
+      z-index: 1;
+    }
+    .dash-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+    .dash-label {
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+      color: var(--neutral-lighter);
+    }
+    .dash-tag {
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.28);
+      background: rgba(255,255,255,0.05);
+      padding: 3px 9px;
+      border-radius: 5px;
+    }
+    .dash-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .dash-m {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 11px 12px;
+    }
+    .dash-m-lbl { font-size: 0.66rem; color: var(--neutral-lighter); margin-bottom: 3px; letter-spacing: 0.03em; }
+    .dash-m-val { font-size: 1.1rem; font-weight: 800; color: white; letter-spacing: -0.03em; line-height: 1.1; }
+    .dash-m-chg { font-size: 0.64rem; color: var(--base-color-brand--green); font-weight: 600; margin-top: 2px; }
+
+    .dash-chart-box {
+      background: rgba(255,255,255,0.025);
+      border: 1px solid rgba(255,255,255,0.055);
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+    }
+    .dash-chart-lbl { font-size: 0.67rem; color: var(--neutral-lighter); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 10px; }
+    .chart-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+      height: 52px;
+    }
+    .bar {
+      flex: 1;
+      border-radius: 3px 3px 0 0;
+      transition: opacity 0.18s;
+    }
+    .bar:hover { opacity: 0.75; }
+
+    .dash-ai-insight {
+      background: rgba(10,158,224,0.1);
+      border: 1px solid rgba(10,158,224,0.2);
+      border-radius: 10px;
+      padding: 11px 13px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .insight-ico {
+      width: 26px; height: 26px;
+      background: rgba(10,158,224,0.22);
+      border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.8rem;
+    }
+    .insight-copy {
+      font-size: 0.75rem;
+      color: var(--base-color-brand--purple-200);
+      line-height: 1.45;
+    }
+    .insight-copy strong { color: white; font-weight: 600; }
+
+    /* ── LOGOS ── */
+    #logos {
+      padding: 48px 0;
+      border-top: 1px solid rgba(255,255,255,0.055);
+      border-bottom: 1px solid rgba(255,255,255,0.055);
+    }
+    .logos-eyebrow {
+      text-align: center;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--neutral-lighter);
+      margin-bottom: 26px;
+    }
+    .logos-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 44px;
+      flex-wrap: wrap;
+    }
+    .logo-word {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: rgba(255,255,255,0.2);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      transition: color 0.18s;
+    }
+    .logo-word:hover { color: rgba(255,255,255,0.38); }
+
+    /* ── SHARED SECTION TYPOGRAPHY ── */
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--base-color-brand--green);
+      margin-bottom: 12px;
+    }
+    .section-h2 {
+      font-size: clamp(1.85rem, 3.4vw, 2.7rem);
+      font-weight: 700;
+      line-height: 1.14;
+      letter-spacing: -0.02em;
+      color: white;
+      max-width: 580px;
+      margin-bottom: 14px;
+      font-family: 'Roboto Mono', monospace;
+    }
+    .section-sub {
+      font-size: 1rem;
+      color: var(--neutral-lighter);
+      line-height: 1.72;
+      max-width: 500px;
+      margin-bottom: 52px;
+    }
+
+    /* ── STEPS ── */
+    #steps { padding: 96px 0; }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+    .step-card {
+      background: rgba(255,255,255,0.028);
+      border: 1px solid rgba(255,255,255,0.075);
+      border-radius: 16px;
+      padding: 28px 26px;
+      transition: border-color 0.24s, background 0.24s, transform 0.24s;
+    }
+    .step-card:hover {
+      border-color: rgba(10,158,224,0.3);
+      background: rgba(10,158,224,0.04);
+      transform: translateY(-3px);
+    }
+    .step-num {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: rgba(10,158,224,0.18);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+    .step-ico {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 14px;
+    }
+    .step-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+    .step-desc {
+      font-size: 0.875rem;
+      color: var(--neutral-lighter);
+      line-height: 1.67;
+    }
+
+    /* ── FEATURES ── */
+    #features { padding: 0 0 96px; }
+    .feat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .feat-card {
+      background: rgba(255,255,255,0.028);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      padding: 26px;
+      transition: border-color 0.24s, background 0.24s, transform 0.24s;
+    }
+    .feat-card:hover {
+      border-color: rgba(10,158,224,0.24);
+      background: rgba(10,158,224,0.032);
+      transform: translateY(-3px);
+    }
+    .feat-card.span2 {
+      grid-column: span 2;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: center;
+    }
+    .feat-ico {
+      width: 42px; height: 42px;
+      border-radius: 11px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 14px;
+    }
+    .feat-title {
+      font-size: 0.975rem;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 8px;
+      letter-spacing: -0.01em;
+    }
+    .feat-desc {
+      font-size: 0.845rem;
+      color: var(--neutral-lighter);
+      line-height: 1.67;
+    }
+    .feat-visual {
+      background: rgba(10,158,224,0.07);
+      border: 1px solid rgba(10,158,224,0.14);
+      border-radius: 12px;
+      height: 150px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 20px;
+      gap: 9px;
+    }
+    .fv-bar {
+      border-radius: 4px;
+      height: 8px;
+    }
+
+    /* ── STATS ── */
+    #stats {
+      padding: 76px 0;
+      background: rgba(10,158,224,0.055);
+      border-top: 1px solid rgba(10,158,224,0.1);
+      border-bottom: 1px solid rgba(10,158,224,0.1);
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px;
+      text-align: center;
+    }
+    .stat-val {
+      font-size: 2.9rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-lbl {
+      font-size: 0.875rem;
+      color: var(--neutral-lighter);
+      line-height: 1.55;
+    }
+
+    /* ── QUOTE ── */
+    #quote { padding: 96px 0; }
+    .quote-card {
+      background: linear-gradient(135deg, rgba(10,158,224,0.14) 0%, rgba(7,0,31,0.96) 100%);
+      border: 1px solid rgba(10,158,224,0.18);
+      border-radius: 22px;
+      padding: 60px 60px 52px;
+      position: relative;
+      overflow: hidden;
+    }
+    .quote-card::before {
+      content: '';
+      position: absolute;
+      top: -80px; right: -80px;
+      width: 380px; height: 380px;
+      background: radial-gradient(ellipse, rgba(10,158,224,0.11) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .quote-card::after {
+      content: '';
+      position: absolute;
+      bottom: -60px; left: -60px;
+      width: 300px; height: 300px;
+      background: radial-gradient(ellipse, rgba(0,212,232,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .q-marks {
+      font-size: 5rem;
+      line-height: 0.6;
+      color: var(--base-color-brand--purple);
+      opacity: 0.35;
+      font-weight: 800;
+      margin-bottom: 22px;
+    }
+    .q-text {
+      font-size: clamp(1.15rem, 2.4vw, 1.68rem);
+      font-weight: 600;
+      line-height: 1.52;
+      color: white;
+      letter-spacing: -0.02em;
+      max-width: 800px;
+      margin-bottom: 34px;
+      position: relative;
+      z-index: 1;
+    }
+    .q-text em {
+      font-style: normal;
+      color: var(--base-color-brand--green);
+    }
+    .q-author {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      position: relative;
+      z-index: 1;
+    }
+    .q-avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--base-color-brand--purple), var(--base-color-brand--green));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.82rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      color: white;
+    }
+    .q-name { font-size: 0.9rem; font-weight: 700; color: white; }
+    .q-role { font-size: 0.8rem; color: var(--neutral-lighter); }
+
+    /* ── PRICING ── */
+    #pricing { padding: 96px 0; }
+    .pricing-hdr { text-align: center; margin-bottom: 52px; }
+    .pricing-hdr .section-h2 { max-width: 100%; margin-bottom: 10px; }
+    .pricing-hdr .section-sub { margin: 0 auto; text-align: center; }
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      align-items: start;
+    }
+    .price-card {
+      background: rgba(255,255,255,0.028);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 30px 28px;
+      transition: transform 0.22s;
+    }
+    .price-card:hover { transform: translateY(-4px); }
+    .price-card.featured {
+      background: rgba(10,158,224,0.09);
+      border-color: var(--base-color-brand--purple);
+      position: relative;
+    }
+    .pc-badge {
+      position: absolute;
+      top: -12px; left: 50%; transform: translateX(-50%);
+      background: var(--base-color-brand--purple);
+      color: white;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 4px 14px;
+      border-radius: 100px;
+      white-space: nowrap;
+    }
+    .pc-tier {
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--neutral-lighter);
+      margin-bottom: 10px;
+    }
+    .pc-tier.featured-tier { color: var(--base-color-brand--purple-200); }
+    .pc-price {
+      font-size: 2.9rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: white;
+      line-height: 1;
+      margin-bottom: 5px;
+    }
+    .pc-price sup { font-size: 1.1rem; vertical-align: super; font-weight: 700; }
+    .pc-period {
+      font-size: 0.78rem;
+      color: var(--neutral-lighter);
+      margin-bottom: 20px;
+    }
+    .pc-desc {
+      font-size: 0.858rem;
+      color: var(--neutral-lighter);
+      line-height: 1.62;
+      margin-bottom: 20px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(255,255,255,0.065);
+    }
+    .pc-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-bottom: 26px;
+    }
+    .pc-features li {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      font-size: 0.858rem;
+      color: rgba(255,255,255,0.8);
+      line-height: 1.5;
+    }
+    .chk {
+      width: 17px; height: 17px;
+      border-radius: 50%;
+      background: rgba(0,212,232,0.14);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+      font-size: 0.6rem;
+      color: var(--base-color-brand--green);
+    }
+    .chk.off { background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.22); }
+    .off-text { color: rgba(255,255,255,0.28); }
+    .btn-pc-primary {
+      width: 100%;
+      background: var(--base-color-brand--green);
+      color: var(--base-color-brand--black);
+      border: none;
+      padding: 13px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.18s, transform 0.14s;
+      font-family: inherit;
+    }
+    .btn-pc-primary:hover { background: var(--base-color-brand--green-300); transform: translateY(-1px); }
+    .btn-pc-primary:active { transform: translateY(0); }
+    .btn-pc-primary:focus-visible { outline: 2px solid var(--base-color-brand--green); outline-offset: 2px; }
+    .btn-pc-outline {
+      width: 100%;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.17);
+      color: white;
+      padding: 13px;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: border-color 0.18s, background 0.18s, transform 0.14s;
+      font-family: inherit;
+    }
+    .btn-pc-outline:hover { border-color: rgba(255,255,255,0.34); background: rgba(255,255,255,0.04); transform: translateY(-1px); }
+    .btn-pc-outline:active { transform: translateY(0); }
+    .btn-pc-outline:focus-visible { outline: 2px solid var(--base-color-brand--purple); outline-offset: 2px; }
+
+    /* ── FAQ ── */
+    #faq { padding: 96px 0; }
+    .faq-hdr { text-align: center; margin-bottom: 48px; }
+    .faq-hdr .section-h2 { max-width: 100%; }
+    .faq-list {
+      max-width: 740px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .faq-item {
+      background: rgba(255,255,255,0.027);
+      border: 1px solid rgba(255,255,255,0.075);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.22s;
+    }
+    .faq-item.open { border-color: rgba(10,158,224,0.28); }
+    .faq-q {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 22px;
+      cursor: pointer;
+      font-size: 0.93rem;
+      font-weight: 600;
+      color: white;
+      gap: 16px;
+      transition: color 0.18s;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+    .faq-q:hover { color: var(--base-color-brand--purple-200); }
+    .faq-chevron {
+      width: 18px; height: 18px;
+      flex-shrink: 0;
+      transition: transform 0.28s cubic-bezier(0.4,0,0.2,1);
+      color: var(--neutral-lighter);
+    }
+    .faq-item.open .faq-chevron { transform: rotate(180deg); color: var(--base-color-brand--purple-200); }
+    .faq-a {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.32s cubic-bezier(0.4,0,0.2,1), padding 0.28s;
+      padding: 0 22px;
+      font-size: 0.875rem;
+      color: var(--neutral-lighter);
+      line-height: 1.72;
+    }
+    .faq-item.open .faq-a { max-height: 300px; padding: 0 22px 18px; }
+
+    /* ── BOTTOM CTA ── */
+    #cta-bottom { padding: 72px 0 96px; }
+    .cta-box {
+      background: linear-gradient(135deg, rgba(10,158,224,0.17) 0%, rgba(7,0,31,0.92) 55%, rgba(0,212,232,0.055) 100%);
+      border: 1px solid rgba(10,158,224,0.22);
+      border-radius: 22px;
+      padding: 68px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      top: -80px; left: 50%; transform: translateX(-50%);
+      width: 550px; height: 380px;
+      background: radial-gradient(ellipse, rgba(10,158,224,0.13) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta-h2 {
+      font-size: clamp(1.7rem, 2.8vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+      position: relative; z-index: 1;
+    }
+    .cta-sub {
+      font-size: 1rem;
+      color: var(--neutral-lighter);
+      margin-bottom: 34px;
+      position: relative; z-index: 1;
+    }
+    .cta-actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      position: relative; z-index: 1;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid rgba(255,255,255,0.065);
+      padding: 60px 0 30px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 44px;
+      margin-bottom: 52px;
+    }
+    .footer-brand p {
+      font-size: 0.875rem;
+      color: var(--neutral-lighter);
+      line-height: 1.7;
+      margin-top: 13px;
+      max-width: 250px;
+    }
+    .fc-title {
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.45);
+      margin-bottom: 14px;
+    }
+    .fc-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .fc-links a {
+      text-decoration: none;
+      font-size: 0.875rem;
+      color: var(--neutral-lighter);
+      transition: color 0.18s;
+    }
+    .fc-links a:hover { color: white; }
+    .fc-links a:focus-visible { outline: 2px solid var(--base-color-brand--purple); outline-offset: 2px; border-radius: 2px; }
+    .footer-btm {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 22px;
+      border-top: 1px solid rgba(255,255,255,0.055);
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .footer-copy { font-size: 0.78rem; color: rgba(255,255,255,0.28); }
+    .footer-legal { display: flex; gap: 18px; }
+    .footer-legal a {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.28);
+      text-decoration: none;
+      transition: color 0.18s;
+    }
+    .footer-legal a:hover { color: rgba(255,255,255,0.55); }
+
+    #hero .wrap {
+      position: relative;
+    }
+    /* Frosted text backdrop behind left hero column */
+    .hero-text-backdrop {
+      position: relative;
+    }
+    .hero-text-backdrop::before {
+      content: '';
+      position: absolute;
+      inset: -28px -32px;
+      background: rgba(6, 15, 28, 0.52);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,0.055);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 920px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .feat-grid { grid-template-columns: 1fr; }
+      .feat-card.span2 { grid-column: span 1; grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-grid { grid-template-columns: 1fr; max-width: 400px; margin: 0 auto; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+      .logos-row { gap: 22px; }
+    }
+    @media (max-width: 640px) {
+      .nav-links { display: none; }
+      .quote-card { padding: 34px 26px; }
+      .cta-box { padding: 44px 24px; }
+      .cta-actions { flex-direction: column; align-items: center; }
+      .hero-ctas { flex-direction: column; align-items: flex-start; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-btm { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo" style="gap:0">
+      <span style="font-family:'Roboto Mono',monospace;font-weight:700;font-size:1.35rem;letter-spacing:-0.01em;color:white;">
+        <span style="background:#0A9EE0;color:white;padding:2px 7px;border-radius:5px;margin-right:6px;">AIS</span>AI Automation Society
+      </span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#steps">How it works</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#faq">FAQ</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="btn-ghost">Log in</button>
+      <button class="btn-green">Get started</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ══ HERO ══ -->
+<section id="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-text-backdrop">
+        <div class="hero-badge anim-fade-up">
+          <span class="badge-dot"></span>
+          AIS — The #1 community for AI automation
+        </div>
+        <h1 class="hero-h1 anim-d1">
+          Automate together.<br><span class="accent">Scale faster.</span>
+        </h1>
+        <p class="hero-sub anim-d2">
+          Join thousands of builders, operators, and founders who are mastering AI automation. Get access to workflows, tools, live events, and a community that moves as fast as the technology.
+        </p>
+        <div class="hero-ctas anim-d3">
+          <button class="btn-green-lg">
+            Join for free
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5H12.5M8.5 3.5L12.5 7.5L8.5 11.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button class="btn-outline-lg">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><circle cx="7.5" cy="7.5" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M6 5L10 7.5L6 10V5Z" fill="currentColor"/></svg>
+            See how it works
+          </button>
+        </div>
+      </div>
+
+      <!-- Dashboard mockup -->
+      <div class="dash-wrap anim-d4 anim-float">
+        <div class="dash-card">
+          <div class="dash-topbar">
+            <span class="dash-label">Decision Overview</span>
+            <span class="dash-tag">Last 30 days</span>
+          </div>
+          <div class="dash-metrics">
+            <div class="dash-m">
+              <div class="dash-m-lbl">Decisions made</div>
+              <div class="dash-m-val">1,284</div>
+              <div class="dash-m-chg">↑ 18% this month</div>
+            </div>
+            <div class="dash-m">
+              <div class="dash-m-lbl">Time saved</div>
+              <div class="dash-m-val">4.2h</div>
+              <div class="dash-m-chg">↑ 32% vs before</div>
+            </div>
+            <div class="dash-m">
+              <div class="dash-m-lbl">Accuracy</div>
+              <div class="dash-m-val">94%</div>
+              <div class="dash-m-chg">↑ 7 pts</div>
+            </div>
+          </div>
+          <div class="dash-chart-box">
+            <div class="dash-chart-lbl">Insight volume</div>
+            <div class="chart-bars">
+              <div class="bar" style="height:35%;background:rgba(10,158,224,0.4)"></div>
+              <div class="bar" style="height:52%;background:rgba(10,158,224,0.5)"></div>
+              <div class="bar" style="height:43%;background:rgba(10,158,224,0.4)"></div>
+              <div class="bar" style="height:68%;background:rgba(10,158,224,0.58)"></div>
+              <div class="bar" style="height:58%;background:rgba(10,158,224,0.5)"></div>
+              <div class="bar" style="height:78%;background:rgba(10,158,224,0.65)"></div>
+              <div class="bar" style="height:63%;background:rgba(10,158,224,0.54)"></div>
+              <div class="bar" style="height:88%;background:#00D4E8"></div>
+              <div class="bar" style="height:73%;background:rgba(10,158,224,0.62)"></div>
+              <div class="bar" style="height:82%;background:rgba(10,158,224,0.68)"></div>
+              <div class="bar" style="height:95%;background:#00D4E8"></div>
+              <div class="bar" style="height:86%;background:rgba(10,158,224,0.72)"></div>
+            </div>
+          </div>
+          <div class="dash-ai-insight">
+            <div class="insight-ico">✦</div>
+            <div class="insight-copy">
+              <strong>AI insight:</strong> Revenue decisions made with AI Automation Society are <strong>2.4× more likely</strong> to hit targets this quarter.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ LOGOS ══ -->
+<section id="logos">
+  <div class="wrap">
+    <p class="logos-eyebrow">Trusted by teams at</p>
+    <div class="logos-row">
+      <span class="logo-word">Stripe</span>
+      <span class="logo-word">Notion</span>
+      <span class="logo-word">Linear</span>
+      <span class="logo-word">Vercel</span>
+      <span class="logo-word">Figma</span>
+      <span class="logo-word">Loom</span>
+    </div>
+  </div>
+</section>
+
+<!-- ══ THREE STEPS ══ -->
+<section id="steps">
+  <div class="wrap">
+    <span class="eyebrow">How it works</span>
+    <h2 class="section-h2">From zero to automating in three steps</h2>
+    <p class="section-sub">The fastest way to go from curious to capable. AIS gives you the community, curriculum, and tools to get there.</p>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">01</div>
+        <div class="step-ico" style="background:rgba(10,158,224,0.14)">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M4 10H16M10 4V16" stroke="#7DD3FA" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div class="step-title">Join the community</div>
+        <div class="step-desc">Create your free account and get instant access to our member portal, resource library, and private community channels.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">02</div>
+        <div class="step-ico" style="background:rgba(0,212,232,0.11)">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="4" stroke="#00D4E8" stroke-width="1.8"/><path d="M10 2V5M10 15V18M2 10H5M15 10H18" stroke="#00D4E8" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </div>
+        <div class="step-title">Learn & build</div>
+        <div class="step-desc">Follow structured learning paths, copy proven automation workflows, and watch expert-led workshops at your own pace.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">03</div>
+        <div class="step-ico" style="background:rgba(10,158,224,0.14)">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M5 10L8.5 13.5L15 7" stroke="#7DD3FA" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="step-title">Ship automations</div>
+        <div class="step-desc">Deploy real workflows into your business, share what you've built with the community, and keep levelling up as AI evolves.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FEATURES ══ -->
+<section id="features">
+  <div class="wrap">
+    <span class="eyebrow">Features</span>
+    <h2 class="section-h2">Everything you need to master AI automation</h2>
+    <p class="section-sub" style="margin-bottom:40px">Built for builders who want real skills, real workflows, and a real community — not just another newsletter.</p>
+    <div class="feat-grid">
+      <div class="feat-card span2">
+        <div>
+          <div class="feat-ico" style="background:rgba(10,158,224,0.14)">
+            <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="2" y="2" width="8" height="8" rx="2" stroke="#7DD3FA" stroke-width="1.7"/><rect x="12" y="2" width="8" height="8" rx="2" stroke="#7DD3FA" stroke-width="1.7"/><rect x="2" y="12" width="8" height="8" rx="2" stroke="#7DD3FA" stroke-width="1.7"/><rect x="12" y="12" width="8" height="8" rx="2" stroke="#7DD3FA" stroke-width="1.7"/></svg>
+          </div>
+          <div class="feat-title">Workflow library</div>
+          <div class="feat-desc">Browse and copy 500+ battle-tested automation workflows built by community members across every major AI tool and platform.</div>
+        </div>
+        <div class="feat-visual">
+          <div class="fv-bar" style="background:rgba(10,158,224,0.28);width:80%"></div>
+          <div class="fv-bar" style="background:rgba(0,212,232,0.22);width:58%"></div>
+          <div class="fv-bar" style="background:rgba(10,158,224,0.2);width:90%"></div>
+          <div class="fv-bar" style="background:rgba(0,212,232,0.16);width:44%"></div>
+          <div class="fv-bar" style="background:rgba(10,158,224,0.24);width:68%"></div>
+        </div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-ico" style="background:rgba(0,212,232,0.1)">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 15L8 9L12 13L17 6" stroke="#00D4E8" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="feat-title">Live workshops</div>
+        <div class="feat-desc">Weekly live sessions with practitioners building real automations. Ask questions, follow along, and walk away with working flows.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-ico" style="background:rgba(10,158,224,0.14)">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2L13.5 7.5H19.5L14.5 11.5L16.5 17L11 13.5L5.5 17L7.5 11.5L2.5 7.5H8.5L11 2Z" stroke="#7DD3FA" stroke-width="1.7" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="feat-title">Expert-led courses</div>
+        <div class="feat-desc">Structured learning paths from beginner to advanced — covering Make, n8n, Zapier, custom GPTs, AI agents, and more.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-ico" style="background:rgba(0,212,232,0.1)">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="8" r="4" stroke="#00D4E8" stroke-width="1.7"/><path d="M3 19C3 15.686 6.686 13 11 13C15.314 13 19 15.686 19 19" stroke="#00D4E8" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </div>
+        <div class="feat-title">Private community</div>
+        <div class="feat-desc">A focused, no-noise community of serious builders. Share wins, get feedback, find collaborators, and stay sharp together.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-ico" style="background:rgba(10,158,224,0.14)">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="3" width="16" height="16" rx="3" stroke="#7DD3FA" stroke-width="1.7"/><path d="M7 11H15M7 7H15M7 15H11" stroke="#7DD3FA" stroke-width="1.7" stroke-linecap="round"/></svg>
+        </div>
+        <div class="feat-title">Tool directory</div>
+        <div class="feat-desc">A curated, community-vetted directory of AI tools organised by use case. Stop wasting time evaluating tools solo.</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-ico" style="background:rgba(0,212,232,0.1)">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M6 8L11 5L16 8V14L11 17L6 14V8Z" stroke="#00D4E8" stroke-width="1.7" stroke-linejoin="round"/><circle cx="11" cy="11" r="2" fill="#00D4E8" fill-opacity="0.35"/></svg>
+        </div>
+        <div class="feat-title">Weekly newsletter</div>
+        <div class="feat-desc">The AIS Digest — curated AI automation news, new workflow drops, and member spotlights delivered every week.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ STATS ══ -->
+<section id="stats">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div>
+        <div class="stat-val" style="color:var(--base-color-brand--green)">12k+</div>
+        <div class="stat-lbl">Active members across 80+ countries</div>
+      </div>
+      <div>
+        <div class="stat-val" style="color:var(--base-color-brand--purple-200)">500+</div>
+        <div class="stat-lbl">Automation workflows in the library</div>
+      </div>
+      <div>
+        <div class="stat-val" style="color:var(--base-color-brand--green)">3×</div>
+        <div class="stat-lbl">Faster time-to-automation vs going solo</div>
+      </div>
+      <div>
+        <div class="stat-val" style="color:var(--base-color-brand--purple-200)">96%</div>
+        <div class="stat-lbl">Member satisfaction score</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ QUOTE ══ -->
+<section id="quote">
+  <div class="wrap">
+    <div class="quote-card">
+      <div class="q-marks">"</div>
+      <p class="q-text">
+        I went from knowing nothing about automation to running a fully automated client onboarding system in six weeks. The AIS community gave me the workflows, the feedback, and the confidence to <em>just ship it.</em>
+      </p>
+      <div class="q-author">
+        <div class="q-avatar">SC</div>
+        <div>
+          <div class="q-name">Marcus Williams</div>
+          <div class="q-role">Operations Lead & AIS Pro Member</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRICING ══ -->
+<section id="pricing">
+  <div class="wrap">
+    <div class="pricing-hdr">
+      <span class="eyebrow">Membership</span>
+      <h2 class="section-h2">Simple, transparent membership</h2>
+      <p class="section-sub">Start free. Upgrade when you're ready. No hidden fees, no surprises.</p>
+    </div>
+    <div class="pricing-grid">
+      <!-- Free -->
+      <div class="price-card">
+        <div class="pc-tier">Free</div>
+        <div class="pc-price"><sup>$</sup>0</div>
+        <div class="pc-period">forever, no credit card required</div>
+        <div class="pc-desc">For anyone just getting started with AI automation and want to see what the community is about.</div>
+        <ul class="pc-features">
+          <li><span class="chk">✓</span> Community access (read-only)</li>
+          <li><span class="chk">✓</span> 10 free workflow templates</li>
+          <li><span class="chk">✓</span> Weekly AIS newsletter</li>
+          <li><span class="chk">✓</span> Tool directory access</li>
+          <li><span class="chk off">✓</span> <span class="off-text">Live workshops</span></li>
+          <li><span class="chk off">✓</span> <span class="off-text">Full course library</span></li>
+        </ul>
+        <button class="btn-pc-outline">Get started free</button>
+      </div>
+      <!-- Pro -->
+      <div class="price-card featured">
+        <div class="pc-badge">Most popular</div>
+        <div class="pc-tier featured-tier">Pro</div>
+        <div class="pc-price"><sup>$</sup>49</div>
+        <div class="pc-period">per month, billed annually</div>
+        <div class="pc-desc">For builders who are serious about levelling up and want full access to everything AIS has to offer.</div>
+        <ul class="pc-features">
+          <li><span class="chk">✓</span> Full community access</li>
+          <li><span class="chk">✓</span> 500+ workflow templates</li>
+          <li><span class="chk">✓</span> All courses & learning paths</li>
+          <li><span class="chk">✓</span> Weekly live workshops</li>
+          <li><span class="chk">✓</span> Member-only events & AMAs</li>
+          <li><span class="chk">✓</span> Priority support</li>
+        </ul>
+        <button class="btn-pc-primary">Start 14-day free trial</button>
+      </div>
+      <!-- Business -->
+      <div class="price-card">
+        <div class="pc-tier">Business</div>
+        <div class="pc-price"><sup>$</sup>149</div>
+        <div class="pc-period">per month, billed annually</div>
+        <div class="pc-desc">For agencies, teams, or companies who want to bring AI automation skills in-house at scale.</div>
+        <ul class="pc-features">
+          <li><span class="chk">✓</span> Everything in Pro</li>
+          <li><span class="chk">✓</span> Up to 20 team seats</li>
+          <li><span class="chk">✓</span> Private team workspace</li>
+          <li><span class="chk">✓</span> Custom onboarding session</li>
+          <li><span class="chk">✓</span> White-label workflow exports</li>
+          <li><span class="chk">✓</span> Dedicated account manager</li>
+        </ul>
+        <button class="btn-pc-outline">Contact sales</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="faq-hdr">
+      <span class="eyebrow">FAQ</span>
+      <h2 class="section-h2">Frequently asked questions</h2>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item open">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>What is the AI Automation Society?</span>
+          <svg class="faq-chevron" viewBox="0 0 18 18" fill="none"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="faq-a">AIS is the largest community for people learning and building with AI automation. We bring together builders, operators, founders, and freelancers who want to use AI tools to save time, grow their businesses, and stay ahead of the curve. You get workflows, courses, live events, and a private community — all in one place.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Do I need to be technical to join?</span>
+          <svg class="faq-chevron" viewBox="0 0 18 18" fill="none"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="faq-a">Not at all. AIS is designed for people at every skill level. Whether you're a complete beginner or a seasoned developer, you'll find content and community relevant to where you are. Our beginner learning paths require zero coding experience.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>What tools does AIS cover?</span>
+          <svg class="faq-chevron" viewBox="0 0 18 18" fill="none"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="faq-a">We cover the full AI automation stack — Make (Integromat), n8n, Zapier, ChatGPT, Claude, custom GPTs, AI agents, Airtable, Notion automations, and more. We add new tool coverage constantly based on what the community is using.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Can I switch plans at any time?</span>
+          <svg class="faq-chevron" viewBox="0 0 18 18" fill="none"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="faq-a">Yes, you can upgrade or downgrade your plan at any time. Upgrades take effect immediately. Downgrades take effect at the end of your current billing period, and we keep all your data safe.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>What kind of support is available?</span>
+          <svg class="faq-chevron" viewBox="0 0 18 18" fill="none"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="faq-a">Free users get documentation and a community forum. Pro users get email support with a 24-hour SLA. Business users get dedicated Slack support, a named customer success manager, and priority response times.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>Do you offer discounts for nonprofits or startups?</span>
+          <svg class="faq-chevron" viewBox="0 0 18 18" fill="none"><path d="M4.5 6.75L9 11.25L13.5 6.75" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <div class="faq-a">Yes. We offer 50% off all paid plans for registered nonprofits and early-stage startups (under 2 years old, under $1M ARR). Contact us at hello@crewautomateapp.com with proof of eligibility.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ BOTTOM CTA ══ -->
+<section id="cta-bottom">
+  <div class="wrap">
+    <div class="cta-box">
+      <h2 class="cta-h2">Ready to automate together?</h2>
+      <p class="cta-sub">Join free today. No credit card needed. Your first automation could be live this week.</p>
+      <div class="cta-actions">
+        <button class="btn-green-lg">
+          Get started free
+          <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2.5 7.5H12.5M8.5 3.5L12.5 7.5L8.5 11.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="btn-outline-lg">Talk to sales</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="nav-logo" style="gap:0;font-size:1rem">
+          <span style="font-family:'Roboto Mono',monospace;font-weight:700;color:white;">
+            <span style="background:#0A9EE0;color:white;padding:2px 6px;border-radius:4px;margin-right:6px;">AIS</span>AI Automation Society
+        </a>
+        <p>The #1 community for AI automation. Learn, build, and ship with thousands of builders worldwide.</p>
+      </div>
+      <div>
+        <div class="fc-title">Product</div>
+        <ul class="fc-links">
+          <li><a href="#">Features</a></li>
+          <li><a href="#">Integrations</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">Changelog</a></li>
+          <li><a href="#">Roadmap</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="fc-title">Company</div>
+        <ul class="fc-links">
+          <li><a href="#">About</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Press</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="fc-title">Resources</div>
+        <ul class="fc-links">
+          <li><a href="#">Documentation</a></li>
+          <li><a href="#">API reference</a></li>
+          <li><a href="#">Community</a></li>
+          <li><a href="#">Status</a></li>
+          <li><a href="#">Security</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-btm">
+      <span class="footer-copy">© 2025 AI Automation Society. All rights reserved.</span>
+      <div class="footer-legal">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookie Settings</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+
+  function toggleFaq(el) {
+    const item = el.closest('.faq-item');
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+
+  // Scroll-triggered fade-in for cards
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+
+  document.querySelectorAll('.step-card, .feat-card, .price-card, .stat-val, .faq-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(18px)';
+    el.style.transition = 'opacity 0.48s ease, transform 0.48s ease';
+    io.observe(el);
+  });
+</script>
+
+  <!-- Nero Voice Agent -->
+  <elevenlabs-convai agent-id="agent_1801kr73z912frgtz68h7vd5n4y7"></elevenlabs-convai>
+  <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
+</body>
+</html>
