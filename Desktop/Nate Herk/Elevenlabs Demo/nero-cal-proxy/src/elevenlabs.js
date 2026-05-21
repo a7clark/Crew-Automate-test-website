@@ -26,7 +26,7 @@ export async function createAgent(client, workerBaseUrl, apiKey) {
     },
   };
 
-  const res = await fetch(`${EL_BASE}/v1/convai/agents`, {
+  const res = await fetch(`${EL_BASE}/v1/convai/agents/create`, {
     method: 'POST',
     headers: { 'xi-api-key': apiKey, 'Content-Type': 'application/json' },
     body: JSON.stringify(body),
@@ -68,9 +68,10 @@ function buildCheckAvailabilityTool(url) {
     name: 'check_availability',
     description: 'Get available discovery call time slots. Call this when the visitor agrees to book. Pass their IANA timezone (e.g. America/Chicago). Returns a list of slots with human-readable display strings.',
     api_schema: {
+      request_headers: {},
       url,
       method: 'GET',
-      request_body_schema: null,
+      path_params_schema: {},
       query_params_schema: {
         properties: {
           timeZone: {
@@ -78,7 +79,12 @@ function buildCheckAvailabilityTool(url) {
             description: "Visitor's IANA timezone string, e.g. America/New_York",
           },
         },
+        required: ['timeZone'],
       },
+      request_body_schema: null,
+      response_body_schema: null,
+      content_type: 'application/json',
+      auth_connection: null,
     },
   };
 }
@@ -89,17 +95,24 @@ function buildBookMeetingTool(url) {
     name: 'book_meeting',
     description: 'Book a discovery call for the visitor. Call after they confirm a slot. Requires their name, email, the ISO datetime of the chosen slot, and their timezone.',
     api_schema: {
+      request_headers: {},
       url,
       method: 'POST',
+      path_params_schema: {},
+      query_params_schema: null,
       request_body_schema: {
+        type: 'object',
+        required: ['visitor_name', 'visitor_email', 'start'],
         properties: {
           visitor_name: { type: 'string', description: "Visitor's full name" },
           visitor_email: { type: 'string', description: "Visitor's email address" },
           start: { type: 'string', description: 'ISO 8601 datetime of the chosen slot (the iso field from check_availability)' },
           visitor_timezone: { type: 'string', description: "Visitor's IANA timezone string" },
         },
-        required: ['visitor_name', 'visitor_email', 'start'],
       },
+      response_body_schema: null,
+      content_type: 'application/json',
+      auth_connection: null,
     },
   };
 }

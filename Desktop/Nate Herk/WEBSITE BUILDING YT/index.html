@@ -69,16 +69,7 @@
     .anim-d4         { animation: fadeUp 0.65s 0.46s ease both; }
     .anim-float      { animation: floatY 5s ease-in-out infinite; }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      z-index: 100;
-      background: rgba(7, 0, 31, 0.88);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-bottom: 1px solid rgba(110, 69, 255, 0.12);
-    }
+    /* ── NAV ── (orphaned: original top-level <nav> was replaced with <header class="top">. Kept commented for reference; bare `nav` selector removed because it was bleeding into the inner <nav class="top-nav">.) */
     .nav-inner {
       max-width: 1160px;
       margin: 0 auto;
@@ -961,30 +952,114 @@
       .footer-grid { grid-template-columns: 1fr; }
       .footer-btm { flex-direction: column; align-items: flex-start; }
     }
+
+    /* ── Standardized site header (matches products / pricing / case-studies / contact / thank-you) ── */
+    header.top {
+      position: sticky; top: 0; z-index: 50;
+      background: #0A0F1E;
+      -webkit-backdrop-filter: blur(12px);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,212,232,0.22);
+    }
+    header.top .wrap { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    header.top .top-row { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+    header.top .brand {
+      display: flex; align-items: center; gap: 12px;
+      font-family: 'Montserrat', system-ui, sans-serif;
+      font-weight: 700; font-size: 1.05rem; color: #FFFFFF;
+      text-decoration: none;
+    }
+    header.top .brand-mark {
+      width: 56px; height: 56px; border-radius: 14px;
+      object-fit: cover;
+      border: 1px solid rgba(0,229,255,0.35);
+      box-shadow: 0 0 16px rgba(0,229,255,0.30);
+    }
+    header.top .top-nav {
+      display: flex; gap: 32px;
+      font-size: 0.95rem; color: #FFFFFF;
+    }
+    header.top .top-nav a {
+      color: #FFFFFF;
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+    header.top .top-nav a:hover, header.top .top-nav a.is-active { color: #00E5FF; }
+    /* Match the .btn / .btn-pill rules used by every other page */
+    header.top .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 22px; border-radius: 999px; font-weight: 600; font-size: 0.95rem; transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease; cursor: pointer; border: 0; text-decoration: none; }
+    header.top .btn-pill { background: #00E5FF; color: #0A0F1E; padding: 10px 18px; font-size: 0.9rem; }
+    header.top .btn-pill:hover { transform: translateY(-1px); box-shadow: 0 10px 24px rgba(0,217,255,0.30); }
+    @media (max-width: 860px) {
+      header.top .top-nav { display: none; }
+    }
+  
+    /* Mobile menu toggle */
+    .nav-toggle {
+      display: none;
+      background: transparent; border: 0; cursor: pointer;
+      padding: 8px; flex-direction: column; gap: 4px;
+      align-items: center; justify-content: center;
+    }
+    .nav-toggle span {
+      display: block; width: 22px; height: 2px;
+      background: #FFFFFF; border-radius: 2px;
+      transition: transform 0.22s ease, opacity 0.22s ease;
+    }
+    .top.is-open .nav-toggle span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .top.is-open .nav-toggle span:nth-child(2) { opacity: 0; }
+    .top.is-open .nav-toggle span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+    @media (max-width: 860px) {
+      .nav-toggle { display: flex; }
+      .top-row { position: relative; }
+      .top.is-open .top-nav {
+        display: flex !important;
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: rgba(10,15,30,0.97);
+        -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+        border-top: 1px solid rgba(0,229,255,0.22);
+        border-bottom: 1px solid rgba(0,212,232,0.22);
+        flex-direction: column; gap: 0;
+        padding: 8px 24px 16px;
+      }
+      .top.is-open .top-nav a {
+        padding: 14px 4px;
+        border-bottom: 1px solid rgba(255,255,255,0.06);
+        font-size: 1rem;
+      }
+      .top.is-open .top-nav a:last-child { border-bottom: 0; }
+      /* Mobile pill: smaller, sit immediately to the left of the hamburger */
+      .top .btn-pill, .top .btn-ca-pill {
+        padding: 2px 7px;
+        font-size: 0.5rem;
+        white-space: nowrap;
+        min-width: 110px;
+        justify-content: center;
+        transform: scale(0.8);
+        transform-origin: right center;
+        margin-left: auto;
+        margin-right: 14px;
+        order: 0;
+      }
+      .top .nav-toggle { order: 1; }
+    }
   </style>
 </head>
 <body>
 
 <!-- ══ NAV ══ -->
-<nav>
-  <div class="nav-inner">
-    <a href="#" class="nav-logo" style="gap:0">
-      <span style="font-family:'Roboto Mono',monospace;font-weight:700;font-size:1.35rem;letter-spacing:-0.01em;color:white;">
-        <span style="background:#0A9EE0;color:white;padding:2px 7px;border-radius:5px;margin-right:6px;">AIS</span>AI Automation Society
-      </span>
-    </a>
-    <ul class="nav-links">
-      <li><a href="#features">Features</a></li>
-      <li><a href="#steps">How it works</a></li>
-      <li><a href="#pricing">Pricing</a></li>
-      <li><a href="#faq">FAQ</a></li>
-    </ul>
-    <div class="nav-actions">
-      <button class="btn-ghost">Log in</button>
-      <button class="btn-green">Get started</button>
+  <header class="top">
+    <div class="wrap top-row">
+      <a href="index.html" class="brand"><img class="brand-mark" src="hero-circuit.png" alt="Crew Automate" /> Crew Automate</a>
+      <nav class="top-nav" aria-label="Primary">
+        <a href="products.html">Products</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="case-studies.html">Case studies</a>
+        <a href="faq.html">FAQ</a>
+      </nav>
+      <button class="nav-toggle" aria-label="Toggle menu" aria-expanded="false"><span></span><span></span><span></span></button>
+      <a href="contact.html" class="btn btn-pill">Book free audit</a>
     </div>
-  </div>
-</nav>
+  </header>
 
 <!-- ══ HERO ══ -->
 <section id="hero">
@@ -1368,9 +1443,9 @@
       <div>
         <div class="fc-title">Product</div>
         <ul class="fc-links">
-          <li><a href="#">Features</a></li>
-          <li><a href="#">Integrations</a></li>
-          <li><a href="#">Pricing</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="pricing.html">Pricing</a></li>
+          <li><a href="case-studies.html">Case studies</a></li>
           <li><a href="#">Changelog</a></li>
           <li><a href="#">Roadmap</a></li>
         </ul>
@@ -1382,7 +1457,7 @@
           <li><a href="#">Blog</a></li>
           <li><a href="#">Careers</a></li>
           <li><a href="#">Press</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
       <div>
@@ -1436,7 +1511,147 @@
 </script>
 
   <!-- Nero Voice Agent -->
-  <elevenlabs-convai agent-id="agent_1801kr73z912frgtz68h7vd5n4y7"></elevenlabs-convai>
+  <elevenlabs-convai agent-id="agent_2301ks4f3zznejdr3pkzph6t0dsj" action-text="Book an appointment?"></elevenlabs-convai>
   <script src="https://elevenlabs.io/convai-widget/index.js" async type="text/javascript"></script>
+
+  <!-- Live transcript panel -->
+  <div id="transcript-panel" style="
+    display:none;
+    position:fixed;
+    bottom:100px;
+    right:20px;
+    width:320px;
+    max-height:400px;
+    background:rgba(6,15,28,0.95);
+    border:1px solid rgba(255,255,255,0.12);
+    border-radius:16px;
+    padding:16px;
+    z-index:9998;
+    font-family:'Montserrat',sans-serif;
+    backdrop-filter:blur(12px);
+    box-shadow:0 8px 32px rgba(0,0,0,0.4);
+  ">
+    <div style="font-size:11px;font-weight:600;letter-spacing:0.08em;color:rgba(255,255,255,0.4);text-transform:uppercase;margin-bottom:12px;">Live Transcript</div>
+    <div id="transcript-messages" style="
+      overflow-y:auto;
+      max-height:340px;
+      display:flex;
+      flex-direction:column;
+      gap:8px;
+    "></div>
+  </div>
+
+  <script>
+    (function() {
+      var panel = document.getElementById('transcript-panel');
+      var messages = document.getElementById('transcript-messages');
+
+      function addMessage(role, text) {
+        if (!text || !text.trim()) return;
+        var isAgent = role === 'agent';
+        var bubble = document.createElement('div');
+        bubble.style.cssText = [
+          'padding:8px 12px',
+          'border-radius:10px',
+          'font-size:13px',
+          'line-height:1.45',
+          'max-width:90%',
+          isAgent ? 'align-self:flex-start' : 'align-self:flex-end',
+          isAgent ? 'background:rgba(10,158,224,0.18);color:#BAE8FF' : 'background:rgba(255,255,255,0.1);color:#fff',
+        ].join(';');
+        var label = document.createElement('div');
+        label.style.cssText = 'font-size:10px;font-weight:700;letter-spacing:0.06em;margin-bottom:3px;opacity:0.6;text-transform:uppercase';
+        label.textContent = isAgent ? 'Agent' : 'You';
+        bubble.appendChild(label);
+        var content = document.createElement('div');
+        content.textContent = text;
+        bubble.appendChild(content);
+        messages.appendChild(bubble);
+        messages.scrollTop = messages.scrollHeight;
+        panel.style.display = 'block';
+      }
+
+      function clearTranscript() {
+        messages.innerHTML = '';
+        panel.style.display = 'none';
+      }
+
+      // Intercept the widget's shadow DOM via MutationObserver once call starts
+      function observeShadowDOM() {
+        var widget = document.querySelector('elevenlabs-convai');
+        if (!widget || !widget.shadowRoot) return;
+        var observer = new MutationObserver(function() {
+          var root = widget.shadowRoot;
+          // Try to find transcript text nodes inside the shadow DOM
+          var allText = root.querySelectorAll('[class*="transcript"],[class*="message"],[class*="caption"],[class*="text"]');
+          allText.forEach(function(el) { console.log('[shadow]', el.className, el.textContent); });
+        });
+        observer.observe(widget.shadowRoot, { childList: true, subtree: true, characterData: true });
+      }
+
+      // Use the elevenlabs-convai:call event to get the conversation object
+      function attachWidget() {
+        var widget = document.querySelector('elevenlabs-convai');
+        if (!widget) return;
+
+        widget.addEventListener('elevenlabs-convai:call', function(e) {
+          clearTranscript();
+          // Try to grab conversation from the event or widget internals
+          var conv = e.detail?.conversation || e.detail?.session || widget.conversation || widget._conversation;
+          if (conv) {
+            conv.onMessage = function(msg) {
+              console.log('[conv.onMessage]', msg);
+              if (msg.source === 'user' || msg.role === 'user') addMessage('user', msg.message || msg.text);
+              if (msg.source === 'ai' || msg.role === 'assistant') addMessage('agent', msg.message || msg.text);
+            };
+          }
+          setTimeout(observeShadowDOM, 500);
+        });
+
+        widget.addEventListener('elevenlabs-convai:call-ended', function() {
+          setTimeout(clearTranscript, 5000);
+        });
+
+        // Also listen for any custom events the widget might fire
+        widget.addEventListener('elevenlabs-convai:message', function(e) {
+          var d = e.detail || {};
+          if (d.source === 'user') addMessage('user', d.message || d.text);
+          if (d.source === 'ai') addMessage('agent', d.message || d.text);
+        });
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', attachWidget);
+      } else {
+        attachWidget();
+      }
+    })();
+  </script>
+
+  <script>
+    /* Mobile nav toggle */
+    (function() {
+      var t = document.querySelector('.top');
+      var b = document.querySelector('.nav-toggle');
+      if (!t || !b) return;
+      b.addEventListener('click', function(e) {
+        e.stopPropagation();
+        var open = t.classList.toggle('is-open');
+        b.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      document.addEventListener('click', function(e) {
+        if (!t.contains(e.target)) {
+          t.classList.remove('is-open');
+          b.setAttribute('aria-expanded', 'false');
+        }
+      });
+      t.querySelectorAll('.top-nav a').forEach(function(a) {
+        a.addEventListener('click', function() {
+          t.classList.remove('is-open');
+          b.setAttribute('aria-expanded', 'false');
+        });
+      });
+    })();
+  </script>
 </body>
 </html>
