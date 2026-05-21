@@ -1,0 +1,10 @@
+name = "nero-cal-proxy"
+main = "src/index.js"
+compatibility_date = "2024-01-01"
+
+[vars]
+WORKER_BASE_URL = "https://nero-cal-proxy.workers.dev"
+
+[[kv_namespaces]]
+binding = "CLIENTS"
+id = "edda27866f584581b4ee376a33121a36"
